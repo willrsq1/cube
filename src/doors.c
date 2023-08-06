@@ -6,7 +6,7 @@
 /*   By: wruet-su <william.ruetsuquet@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/06 11:43:57 by wruet-su          #+#    #+#             */
-/*   Updated: 2023/08/06 11:45:49 by wruet-su         ###   ########.fr       */
+/*   Updated: 2023/08/06 19:44:02 by wruet-su         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,17 +19,21 @@ void	ft_doors(int key, t_cube *cube)
 	double i;
 
 	i = ft_check_for_closed_door(cube);
+	cube->door_message = 0;
 	if (i)
 	{
-		printf("PRESS 113 TO OPEN ! \n");
-		if (key == 113)
+		cube->door_message = 1;
+		if (key == 120)
+		{
 			cube->map[(int)(cube->player.x + cos(cube->player.direction) * i)][(int)(cube->player.y + sin(cube->player.direction) * i)] = OPENED_DOOR;
+			return ;
+		}
 	}
 	i = ft_check_for_opened_door(cube);
 	if (i)
 	{
-		printf("PRESS 115 TO CLOOOOOOOOOSE ! \n");
-		if (key == 115)
+		cube->door_message = 1;
+		if (key == 120)
 			cube->map[(int)(cube->player.x + cos(cube->player.direction) * i)][(int)(cube->player.y + sin(cube->player.direction) * i)] = CLOSED_DOOR;
 	}
 }
@@ -62,4 +66,166 @@ static double	ft_check_for_opened_door(t_cube *cube)
 		i += 0.01;
 	}
 	return (0);
+}
+
+void	print_p(int x, int y, t_cube *cube, int color)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	j = 0;
+	while (i++ < 26)
+	{
+		ft_pixel(cube->img, x + i, y, color);
+		ft_pixel(cube->img, x + i, y + 1, color);
+		ft_pixel(cube->img, x + i, y + 21, color);
+		ft_pixel(cube->img, x + i, y + 22, color);
+	}
+	while (j++ < 40)
+	{
+		ft_pixel(cube->img, x, j + y, color);
+		ft_pixel(cube->img, x + 1, j + y + 1, color);
+		if (j < 21)
+			ft_pixel(cube->img, x + i + 1, j + y, color);
+		if (j < 21)
+			ft_pixel(cube->img, x + i, j + y, color);
+	}
+}
+
+void	print_r_part2(int x, int y, t_cube *cube, int color)
+{
+	int	j;
+	int	i;
+	int	z;
+	
+	j = 0;
+	i = 26;
+	z = 30;
+	while (j++ < 40)
+	{
+		ft_pixel(cube->img, x, j + y, color);
+		ft_pixel(cube->img, x + 1, j + y + 1, color);
+		if (j < 21)
+		{
+			ft_pixel(cube->img, x + i + 1, j + y, color);
+			ft_pixel(cube->img, x + i, j + y, color);
+		}
+		else
+		{
+			ft_pixel(cube->img, x + i / 2 + 1 - z, j + y, color);
+			ft_pixel(cube->img, x + i / 2 - z, j + y, color);
+			ft_pixel(cube->img, x + i / 2 + 2 - z, j + y, color);
+		}
+		z--;
+	}
+}
+
+void	print_r(int x, int y, t_cube *cube, int color)
+{
+	int	i;
+
+	i = 0;
+	while (i++ < 26)
+	{
+		ft_pixel(cube->img, x + i, y, color);
+		ft_pixel(cube->img, x + i, y + 1, color);
+		ft_pixel(cube->img, x + i, y + 21, color);
+		ft_pixel(cube->img, x + i, y + 22, color);
+	}
+	print_r_part2(x, y, cube, color);
+}
+
+void	print_e(int x, int y, t_cube *cube, int color)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	j = 0;
+	while (i++ < 26)
+	{
+		ft_pixel(cube->img, x + i, y, color);
+		ft_pixel(cube->img, x + i, y + 1, color);
+		ft_pixel(cube->img, x + i, y + 21, color);
+		ft_pixel(cube->img, x + i, y + 22, color);
+		ft_pixel(cube->img, x + i, y + 40, color);
+		ft_pixel(cube->img, x + i, y + 41, color);
+	}
+	while (j++ < 40)
+	{
+		ft_pixel(cube->img, x, j + y, color);
+		ft_pixel(cube->img, x + 1, j + y + 1, color);
+	}
+}
+
+void	print_s(int x, int y, t_cube *cube, int color)
+{
+	int	i;
+
+	i = 0;
+	while (i++ < 26)
+	{
+		ft_pixel(cube->img, x + i, y, color);
+		ft_pixel(cube->img, x + i, y + 1, color);
+		ft_pixel(cube->img, x + i, y + 21, color);
+		ft_pixel(cube->img, x + i, y + 22, color);
+		ft_pixel(cube->img, x + i, y + 40, color);
+		ft_pixel(cube->img, x + i, y + 41, color);
+	}
+	while (i++ < 66)
+	{
+		if (i < 46)
+		{
+			ft_pixel(cube->img, x, i + y - 26, color);
+			ft_pixel(cube->img, x + 1, i + y - 25, color);
+		}
+		else
+		{
+			ft_pixel(cube->img, x + 25, i + y - 26, color);
+			ft_pixel(cube->img, x + 26, i + y - 25, color);	
+		}
+	}
+}
+
+
+void	print_x(int x, int y, t_cube *cube, int color)
+{
+	int	i;
+
+	i = 0;
+	while (i++ < 20)
+	{
+		ft_pixel(cube->img, x + i, y, color);
+		ft_pixel(cube->img, x + i, y + 1, color);
+		ft_pixel(cube->img, x + i, y + 2, color);
+		ft_pixel(cube->img, x + i, y + 3, color);
+		ft_pixel(cube->img, x + i, y + 4, color);
+		ft_pixel(cube->img, x + i, y + 5, color);
+		ft_pixel(cube->img, x + 20 - i, y, color);
+		ft_pixel(cube->img, x + 20 - i, y + 1, color);
+		ft_pixel(cube->img, x + 20 - i, y + 2, color);
+		ft_pixel(cube->img, x + 20 - i, y + 3, color);
+		ft_pixel(cube->img, x + 20 - i, y + 4, color);
+		ft_pixel(cube->img, x + 20 - i, y + 5, color);
+		y += 2;
+	}
+}
+
+
+void	print_door_message(t_cube *cube)
+{
+	int		x;
+	int		y;
+	int		increment;
+	
+	x = WIN_WIDTH / 2.9;
+	y = WIN_HEIGHT / 10;
+	increment = WIN_WIDTH / 33;
+	print_p(x, y, cube, BLACK);
+	print_r(x + increment, y, cube, BLACK);
+	print_e(x + increment * 2, y, cube, BLACK);
+	print_s(x + increment * 3, y, cube, BLACK);
+	print_s(x + increment * 4, y, cube, BLACK);
+	print_x(x + increment * 6, y, cube, BLACK);
 }

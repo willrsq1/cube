@@ -20,6 +20,7 @@ SOURCES =     		main.c \
 					cube.c \
 					map.c \
 					map_utils.c \
+					map_error.c \
 					utils.c \
 					mlx.c \
 					hooks.c \
@@ -29,6 +30,7 @@ SOURCES =     		main.c \
 					libft/gnl/get_next_line.c \
 					libft/gnl/get_next_line_utils.c \
 					doors.c \
+					minimap.c \
 
 
 SOURCES_BONUS =    	main.c \

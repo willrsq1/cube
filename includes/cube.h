@@ -6,7 +6,7 @@
 /*   By: wruet-su <william.ruetsuquet@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/03 18:57:50 by wruet-su          #+#    #+#             */
-/*   Updated: 2023/08/06 11:46:15 by wruet-su         ###   ########.fr       */
+/*   Updated: 2023/08/06 19:40:50 by wruet-su         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@
 
 # define PLAYER_POSITION -42
 # define END -1
-# define SPACE -2
 # define FAIL -3
 # define PI2 1.570796000000000081087137004942633211612701416015625
 # define PI  3.141592999999999857863031138549558818340301513671875
@@ -55,9 +54,16 @@
 # define PASTEL_PEACH 0xFFDAB9
 # define PASTEL_LAVENDER 0xE6E6FA
 # define PASTEL_BEIGE 0xF5F5DC
+# define GRAY 0xE0E0E0
+# define DARK_GRAY 0xA0A0A0
 
 # define CLOSED_DOOR 2
 # define OPENED_DOOR -2
+
+# define CLOSED_DOOR_COLOR 0x98FF98
+# define OPENED_DOOR_COLOR 0xADD8E6
+
+# define X 1
 
 # define ESC_KEY 65307
 # define UP_ARROW 65362
@@ -112,6 +118,7 @@ typedef struct s_cube
 	int			ceiling_color;
 	int			floor_color;
 	bool		minimap;
+	bool		door_message;
 }	t_cube;
 
 void	ft_cube(char **argv);
@@ -126,7 +133,7 @@ void	get_player_position(t_cube *cube);
 
 void	launch_mlx(t_cube *cube);
 void	launch_window(t_cube *cube);
-void	my_mlx_pixel_put(t_img *img, int x, int y, int color);
+void	ft_pixel(t_img *img, int x, int y, int color);
 
 int		ft_close(t_cube *cube);
 int		ft_key_hook(int key, t_cube *cube);
@@ -143,9 +150,16 @@ int		ft_close(t_cube *cube);
 
 int		ft_valid_pos(t_cube *cube, double x, double y);
 
-void	ft_textures_and_colors(t_cube *cube, int fd);
+void	ft_textures_and_colors(t_cube *cube, int fd, char *s, int count);
 void	skip_elements(int fd, t_cube *cube);
 
 void	ft_doors(int key, t_cube *cube);
+
+void	ft_check_map_is_closed(t_cube *cube, int **map);
+bool	ft_format(char *s);
+
+void	print_door_message(t_cube *cube);
+
+void	ft_minimap(t_cube *cube);
 
 #endif

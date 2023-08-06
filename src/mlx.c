@@ -6,7 +6,7 @@
 /*   By: wruet-su <william.ruetsuquet@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/03 23:13:23 by wruet-su          #+#    #+#             */
-/*   Updated: 2023/08/06 09:45:18 by wruet-su         ###   ########.fr       */
+/*   Updated: 2023/08/06 19:40:50 by wruet-su         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,11 +52,11 @@ void	launch_window(t_cube *cube)
 	mlx_loop(cube->mlx);
 }
 
-void	my_mlx_pixel_put(t_img *img, int x, int y, int color)
+void	ft_pixel(t_img *img, int x, int y, int color)
 {
 	char	*dst;
 
-	if (x >= 0 && y >= 0 && y <= WIN_HEIGHT && x <= WIN_WIDTH)
+	if (x >= 0 && y >= 0 && y < WIN_HEIGHT && x < WIN_WIDTH)
 	{
 		dst = img->addr + (y * img->size_line + x * (img->bpp / 8));
 		*(unsigned int *)dst = color;

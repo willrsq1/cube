@@ -2,7 +2,6 @@
 
 # Liste des fichiers à tester
 files=(
-    "blig_map.cub"
     "empty_map.cub"
     "invalid_chr.cub"
     "invalid_extra_line.cub"
@@ -12,14 +11,13 @@ files=(
     "invalid_rgb_overflow.cub"
     "invalid_texture_path.cub"
     "invalid_texture_path_2.cub"
-    "map.cub"
-    "small_map.cub"
     "tab_by_the_right.cub"
 )
 
 # Boucle pour tester chaque fichier
 for file in "${files[@]}"; do
-    echo "Testing $file..."
-    ./cube "$file"
+    full_path="maps/$file"  # Ajoute le préfixe "maps/" au nom de fichier
+    echo "Testing $full_path..."
+    ./cube "$full_path"
     echo "============================================="
 done

@@ -6,7 +6,7 @@
 /*   By: wruet-su <william.ruetsuquet@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/03 23:21:29 by wruet-su          #+#    #+#             */
-/*   Updated: 2023/08/06 11:45:26 by wruet-su         ###   ########.fr       */
+/*   Updated: 2023/08/06 18:12:40 by wruet-su         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,9 @@ int	ft_key_hook(int key, t_cube *cube)
 	ft_key_pressed(key, cube);
 	if (ft_valid_pos(cube, cube->player.x, cube->player.y) > 0)
 	{
-		if (!ft_valid_pos(cube, cube->player.prev_x, cube->player.y))
+		if (ft_valid_pos(cube, cube->player.prev_x, cube->player.y) <= 0)
 			cube->player.x = cube->player.prev_x;
-		else if (!ft_valid_pos(cube, cube->player.x, cube->player.prev_y))
+		else if (ft_valid_pos(cube, cube->player.x, cube->player.prev_y) <= 0)
 			cube->player.y = cube->player.prev_y;
 		else
 		{
@@ -104,6 +104,9 @@ static void	ft_update_image(t_cube *cube)
 	cube->img->addr = mlx_get_data_addr(cube->img->img_ptr, &cube->img->bpp, \
 		&cube->img->size_line, &cube->img->endian);
 	ft_draw(cube);
+	if (cube->door_message)
+		print_door_message(cube);
+	ft_minimap(cube);
 	mlx_put_image_to_window(cube->mlx, cube->mlx_win, cube->img->img_ptr, 0, 0);
 	mlx_destroy_image(cube->mlx, cube->img->img_ptr);
 	cube->img->img_ptr = NULL;

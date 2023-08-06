@@ -6,7 +6,7 @@
 /*   By: wruet-su <william.ruetsuquet@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/03 18:57:56 by wruet-su          #+#    #+#             */
-/*   Updated: 2023/08/06 11:35:56 by wruet-su         ###   ########.fr       */
+/*   Updated: 2023/08/06 13:23:49 by wruet-su         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ void	ft_error(char *s1, char *s2, char *s3, t_cube *cube)
 	if (s2)
 		write(2, s2, ft_strlen(s2));
 	if (s3)
-		write(2, s3, ft_strlen(s3));
+		free(s3);
 	write(2, "\n", 1);
 	ft_free_exit(cube);
 }
@@ -90,7 +90,7 @@ int	ft_atoi_cube(char c)
 		c == 'S' || \
 		c == 'E' || \
 		c == 'W')
-		return (PLAYER_POSITION);
+		return (c);
 	if (c == 'D')
 		return (CLOSED_DOOR);
 	return (FAIL);

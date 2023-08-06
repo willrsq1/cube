@@ -6,7 +6,7 @@
 /*   By: wruet-su <william.ruetsuquet@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/04 12:12:02 by wruet-su          #+#    #+#             */
-/*   Updated: 2023/08/06 11:37:03 by wruet-su         ###   ########.fr       */
+/*   Updated: 2023/08/06 19:40:50 by wruet-su         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ static int	ft_color(t_player *player, double x, double y, t_cube *cube)
 	int	color;
 
 	if (cube->map[(int)x][(int)y] == CLOSED_DOOR)
-		return (GREEN);
+		return (CLOSED_DOOR_COLOR);
 	if (fabs((int)x - x) >= fabs((int)y - y))
 	{
 		if (abs((int)x) != abs((int)(x - player->dist_x * RESOLUTION)))
@@ -110,7 +110,7 @@ static int	ft_color(t_player *player, double x, double y, t_cube *cube)
 	x = x - player->dist_x * RESOLUTION;
 	y = y - player->dist_y * RESOLUTION;
 	if (cube->map[(int)(x)][(int)(y)] == OPENED_DOOR)
-		color = BLUE;
+		color = OPENED_DOOR_COLOR;
 	return (color);
 }
 
@@ -127,7 +127,7 @@ static void	draw_wall(double dist, t_cube *cube, int x, int color)
 	while (range)
 	{
 		y = (WIN_HEIGHT / 2 + range_start - range);
-		my_mlx_pixel_put(cube->img, WIN_WIDTH - x, y, color);
+		ft_pixel(cube->img, WIN_WIDTH - x, y, color);
 		range--;
 	}
 }
