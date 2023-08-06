@@ -1,0 +1,15 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "cppdbg",
+            "name": "Debug pipex",
+            "request": "launch",
+            "program": "${workspaceFolder}/cube",
+            "args": [
+                "maps/map.cub"
+            ],
+            "cwd": "${workspaceFolder}",
+        }
+    ]
+}

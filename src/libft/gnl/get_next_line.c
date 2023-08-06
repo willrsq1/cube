@@ -6,7 +6,7 @@
 /*   By: wruet-su <william.ruetsuquet@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 12:02:18 by wruet-su          #+#    #+#             */
-/*   Updated: 2023/05/11 17:48:29 by wruet-su         ###   ########.fr       */
+/*   Updated: 2023/08/06 00:01:23 by wruet-su         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	ft_return_n_position_in_string(const char *s, int c)
 	int	i;
 
 	i = 0;
-	if (ft_strlen_gnl(s) == 0)
+	if (ft_strlen(s) == 0)
 		return (0);
 	while (s[i])
 	{
@@ -47,8 +47,8 @@ char	*ft_customized_strjoin_with_free(char const *s1, char const *s2)
 
 	if (s1 == NULL || s2 == NULL)
 		return (NULL);
-	len1 = ft_strlen_gnl((char *) s1);
-	len2 = ft_strlen_gnl((char *) s2);
+	len1 = ft_strlen((char *) s1);
+	len2 = ft_strlen((char *) s2);
 	str = malloc(len1 + len2 + 1);
 	if (str == 0)
 		return (NULL);
@@ -72,14 +72,14 @@ char	*ft_split_and_free(char *line, char *stash, char *free1, char *free2)
 
 	if (!line)
 		return (NULL);
-	if (ft_strlen_gnl(stash) == 0 && free1 == NULL)
+	if (ft_strlen(stash) == 0 && free1 == NULL)
 		return (NULL);
 	i = ft_return_n_position_in_string(line, '\n');
 	ligne = malloc(i + 1);
 	if (!ligne)
 		return (NULL);
 	ft_strlcpy_gnl(ligne, line, i + 1);
-	ft_strlcpy_gnl(stash, &line[i], ft_strlen_gnl(&line[i]) + 1);
+	ft_strlcpy_gnl(stash, &line[i], ft_strlen(&line[i]) + 1);
 	free(free1);
 	if (free2 != NULL)
 		free(free2);
@@ -93,12 +93,12 @@ char	*give_to_line_what_is_stashed(char *stash)
 {
 	char	*line;
 
-	if (ft_strlen_gnl(stash))
+	if (ft_strlen(stash))
 	{
-		line = ft_strdup_gnl(stash);
+		line = ft_strdup(stash);
 		if (!line)
 			return (NULL);
-		ft_bzero_gnl(stash, 1);
+		ft_bzero(stash, 1);
 	}
 	else
 		line = NULL;
@@ -119,15 +119,15 @@ char	*get_next_line(int fd)
 	if (ft_return_n_position_in_string(stash[fd], '\n'))
 		return (line = ft_split_and_free(stash[fd], stash[fd], NULL, NULL));
 	line = give_to_line_what_is_stashed(stash[fd]);
-	buf = ft_calloc_gnl(BUFFER_SIZE + 1, 1);
+	buf = ft_calloc(BUFFER_SIZE + 1, 1);
 	if (!buf)
 		return (NULL);
 	while (read(fd, buf, BUFFER_SIZE) > 0)
 	{
 		if (!line)
-			line = ft_calloc_gnl(1, 1);
+			line = ft_calloc(1, 1);
 		line = ft_customized_strjoin_with_free(line, buf);
-		ft_bzero_gnl(buf, BUFFER_SIZE);
+		ft_bzero(buf, BUFFER_SIZE);
 		if (ft_return_n_position_in_string(line, '\n'))
 			return (ft_split_and_free(line, stash[fd], line, buf));
 	}

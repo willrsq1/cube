@@ -19,10 +19,16 @@ SRC_PATH_BONUS  = Philosophers_bonus/src
 SOURCES =     		main.c \
 					cube.c \
 					map.c \
+					map_utils.c \
 					utils.c \
+					mlx.c \
+					hooks.c \
+					raycasting.c \
+					raycasting_utils.c \
 					player_init.c \
 					libft/gnl/get_next_line.c \
 					libft/gnl/get_next_line_utils.c \
+					doors.c \
 
 
 SOURCES_BONUS =    	main.c \
@@ -30,6 +36,7 @@ SOURCES_BONUS =    	main.c \
 					init_bonus.c \
 					utils_bonus.c \
 
+MLX = mlx_linux
 ### OBJECTS ###
 
 SRCS = $(addprefix $(SRC_PATH)/,$(SOURCES))
@@ -53,10 +60,10 @@ WHITE       = \033[1;37m
 
 ### RULES ###
 
-all: $(NAME)
+all: $(NAME) mlx
 
 $(NAME): $(OBJS)
-	$(CC) $(FLAGS) -o $@ $^
+	$(CC) $(FLAGS)  -L ${MLX} -o $@ $^ -lmlx -lXext -lX11 -lm -lz
 	@echo "$(GREEN)Project successfully compiled"
 
 $(OBJ_PATH)/%.o: $(SRC_PATH)/%.c $(HEADER)/cube.h
@@ -88,9 +95,12 @@ $(OBJ_PATH_BONUS)/%.o: $(SRC_PATH_BONUS)/%.c $(HEADER_BONUS)/philosophers_bonus.
 	@echo "$(BLUE)Creating object file -> $(WHITE)$(notdir $@)... $(RED)[Done]$(NOC)"
 
 norminette:
-	@norminette
+	@norminette src/ includes/
+
+mlx:
+	@cd $(MLX) && $(MAKE)
 
 re: fclean
 	@$(MAKE) all
 
-.PHONY: re fclean clean norminette bonus
+.PHONY: re fclean clean norminette bonus mlx

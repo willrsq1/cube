@@ -6,7 +6,7 @@
 /*   By: wruet-su <william.ruetsuquet@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 12:24:52 by wruet-su          #+#    #+#             */
-/*   Updated: 2023/04/22 00:17:25 by wruet-su         ###   ########.fr       */
+/*   Updated: 2023/08/06 00:01:23 by wruet-su         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,10 @@ char	*give_to_line_what_is_stashed(char *stash);
 char	*ft_split_and_free(char *line, char *stash, char *free1, char *free2);
 char	*ft_customized_strjoin_with_free(char const *s1, char const *s2);
 int		ft_return_n_position_in_string(const char *s, int c);
-char	*ft_strdup_gnl(const char *s);
-void	*ft_calloc_gnl(size_t nmemb, size_t size);
-void	ft_bzero_gnl(void *s, size_t n);
-size_t	ft_strlen_gnl(const char *str);
+char	*ft_strdup(const char *s);
+void	*ft_calloc(size_t nmemb, size_t size);
+void	ft_bzero(void *s, size_t n);
+size_t	ft_strlen(const char *str);
 size_t	ft_strlcpy_gnl(char *dest, const char *src, size_t size);
 
 /* If BUFFER_SIZE is undefined,
