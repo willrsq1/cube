@@ -6,7 +6,7 @@
 /*   By: wruet-su <william.ruetsuquet@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 03:03:59 by wruet-su          #+#    #+#             */
-/*   Updated: 2023/08/07 03:19:59 by wruet-su         ###   ########.fr       */
+/*   Updated: 2023/08/07 23:44:59 by wruet-su         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,9 @@ int	handle_mouse_move(int x, int y, t_cube *cube)
 		return (1);
 	cube->mouse_drag = 0;
 	if (x > cube->mouse_x)
-		cube->player.direction += (cube->mouse_x - x) * 0.003;
+		cube->player.direction -= (cube->mouse_x - x) * 0.003;
 	if (x < cube->mouse_x)
-		cube->player.direction -= (x - cube->mouse_x) * 0.003;
+		cube->player.direction += (x - cube->mouse_x) * 0.003;
 	cube->mouse_x = x;
 	cube->mouse_y = y;
 	ft_update_image(cube);

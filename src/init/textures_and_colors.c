@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   map_utils.c                                        :+:      :+:    :+:   */
+/*   textures_and_colors.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wruet-su <william.ruetsuquet@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/05 23:56:12 by wruet-su          #+#    #+#             */
-/*   Updated: 2023/08/07 03:01:49 by wruet-su         ###   ########.fr       */
+/*   Updated: 2023/08/07 14:01:14 by wruet-su         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,24 +93,4 @@ static int	ft_get_color(int color, t_cube *cube, char *s)
 	if (cube && s)
 		return (WHITE);
 	return (WHITE);
-}
-
-void	skip_elements(int fd, t_cube *cube)
-{
-	char	*s;
-	int		count;
-
-	count = 0;
-	while (1)
-	{
-		s = get_next_line(fd);
-		if (!s)
-			ft_error("Incomplete .cub file.", NULL, s, cube);
-		if (s[0] == 'N' || s[0] == 'S' || s[0] == 'E' || \
-			s[0] == 'W' || s[0] == 'C' || s[0] == 'F')
-			count++;
-		free(s);
-		if (count == 6)
-			return ;
-	}
 }

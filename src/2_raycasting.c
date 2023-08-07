@@ -6,7 +6,7 @@
 /*   By: wruet-su <william.ruetsuquet@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/04 12:12:02 by wruet-su          #+#    #+#             */
-/*   Updated: 2023/08/07 03:48:43 by wruet-su         ###   ########.fr       */
+/*   Updated: 2023/08/07 13:19:30 by wruet-su         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ void	ft_raycasting(t_cube *cube, t_player *player)
 	int		a;
 
 	a = 0;
-	ft_background(cube);
 	fix_angle(player);
 	angle_save = player->direction;
 	player->color = BLUE;
@@ -116,10 +115,18 @@ static void	draw_wall(double dist, t_cube *cube, int x, int color)
 		dist = 1;
 	range = WIN_HEIGHT / dist;
 	range_start = range / 2;
-	while (range)
-	{
-		y = (WIN_HEIGHT / 2 + range_start - range);
-		ft_pixel(cube->img, x, y, color);
-		range--;
-	}
+	y = WIN_HEIGHT;
+	
+		while (y > WIN_HEIGHT / 2 + range_start - range)
+			ft_pixel(cube->img, x, y--, FLOOR_COLOR);
+		while (range)
+		{
+			y = WIN_HEIGHT / 2 + range_start - range;
+			ft_pixel(cube->img, x, y, color);
+			range--;
+		}
+		y = WIN_HEIGHT / 2 - range_start;
+		while (y + 1)
+			ft_pixel(cube->img, x, y--, CEILING_COLOR);
+	
 }

@@ -6,11 +6,38 @@
 /*   By: wruet-su <william.ruetsuquet@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/06 13:36:13 by wruet-su          #+#    #+#             */
-/*   Updated: 2023/08/07 03:01:44 by wruet-su         ###   ########.fr       */
+/*   Updated: 2023/08/07 14:01:44 by wruet-su         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cube.h"
+
+static bool	ft_check_vertically(int x, int y, int **map, int max);
+static bool	ft_check_horizontally(int x, int y, int **map, int max);
+
+void	ft_check_map_is_closed(t_cube *cube, int **map)
+{
+	int	x;
+	int	y;
+
+	x = 0;
+	while (x < cube->map_lenght)
+	{
+		y = 0;
+		while (y < cube->map_width)
+		{
+			if (map[x][y] == 0 || map[x][y] == CLOSED_DOOR)
+			{
+				if (ft_check_vertically(x, y, map, cube->map_lenght) == 1)
+					ft_error("Map unclosed.", NULL, NULL, cube);
+				if (ft_check_horizontally(x, y, map, cube->map_width) == 1)
+					ft_error("Map unclosed.", NULL, NULL, cube);
+			}
+			y++;
+		}
+		x++;
+	}
+}
 
 static bool	ft_check_vertically(int x, int y, int **map, int max)
 {
@@ -70,30 +97,6 @@ static bool	ft_check_horizontally(int x, int y, int **map, int max)
 	return (0);
 }
 
-void	ft_check_map_is_closed(t_cube *cube, int **map)
-{
-	int	x;
-	int	y;
-
-	x = 0;
-	while (x < cube->map_lenght)
-	{
-		y = 0;
-		while (y < cube->map_width)
-		{
-			if (map[x][y] == 0 || map[x][y] == CLOSED_DOOR)
-			{
-				if (ft_check_vertically(x, y, map, cube->map_lenght) == 1)
-					ft_error("Map unclosed.", NULL, NULL, cube);
-				if (ft_check_horizontally(x, y, map, cube->map_width) == 1)
-					ft_error("Map unclosed.", NULL, NULL, cube);
-			}
-			y++;
-		}
-		x++;
-	}
-}
-
 bool	ft_format(char *s)
 {
 	int	i;
@@ -109,4 +112,24 @@ bool	ft_format(char *s)
 		s[i - 3] == 'c' && s[i - 4] == '.')
 		return (0);
 	return (1);
+}
+
+void	skip_elements(int fd, t_cube *cube)
+{
+	char	*s;
+	int		count;
+
+	count = 0;
+	while (1)
+	{
+		s = get_next_line(fd);
+		if (!s)
+			ft_error("Incomplete .cub file.", NULL, s, cube);
+		if (s[0] == 'N' || s[0] == 'S' || s[0] == 'E' || \
+			s[0] == 'W' || s[0] == 'C' || s[0] == 'F')
+			count++;
+		free(s);
+		if (count == 6)
+			return ;
+	}
 }

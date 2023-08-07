@@ -6,7 +6,7 @@
 /*   By: wruet-su <william.ruetsuquet@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/03 23:21:29 by wruet-su          #+#    #+#             */
-/*   Updated: 2023/08/07 03:33:13 by wruet-su         ###   ########.fr       */
+/*   Updated: 2023/08/07 13:32:16 by wruet-su         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,11 @@ void	ft_update_image(t_cube *cube)
 	}
 	cube->img->addr = mlx_get_data_addr(cube->img->img_ptr, &cube->img->bpp, \
 		&cube->img->size_line, &cube->img->endian);
+	if (!cube->img->addr)
+	{
+		perror("at mlx_new_image in launch_mlx");
+		ft_free_exit(cube);
+	}
 	ft_raycasting(cube, &cube->player);
 	ft_update_image_bonus(cube);
 	mlx_put_image_to_window(cube->mlx, cube->mlx_win, cube->img->img_ptr, 0, 0);

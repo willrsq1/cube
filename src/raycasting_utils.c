@@ -6,7 +6,7 @@
 /*   By: wruet-su <william.ruetsuquet@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/04 22:57:45 by wruet-su          #+#    #+#             */
-/*   Updated: 2023/08/07 03:47:10 by wruet-su         ###   ########.fr       */
+/*   Updated: 2023/08/07 13:19:14 by wruet-su         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,26 +42,5 @@ void	ft_pixel(t_img *img, int x, int y, int color)
 	{
 		dst = img->addr + (y * img->size_line + x * (img->bpp / 8));
 		*(unsigned int *)dst = color;
-	}
-}
-
-void	ft_background(t_cube *cube)
-{
-	int	i;
-	int	y;
-
-	i = -1;
-	while (++i < WIN_HEIGHT / 2)
-	{
-		y = -1;
-		while (++y < WIN_WIDTH)
-			ft_pixel(cube->img, y, i, CEILING_COLOR);
-	}
-	while (i < WIN_HEIGHT)
-	{
-		y = -1;
-		while (++y < WIN_WIDTH)
-			ft_pixel(cube->img, y, i, FLOOR_COLOR);
-		i++;
 	}
 }

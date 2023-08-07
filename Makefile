@@ -24,7 +24,7 @@ SOURCES =     		0_main.c \
 					hooks_utils.c \
 					raycasting_utils.c \
 					init/map.c \
-					init/map_utils.c \
+					init/textures_and_colors.c \
 					init/map_error.c \
 					init/player_init.c \
 					gnl/get_next_line.c \
@@ -66,7 +66,7 @@ WHITE       = \033[1;37m
 ### RULES ###
 
 all: $(NAME) mlx
-	./cube maps/arbesa.cub
+	./cube maps/map.cub
 
 $(NAME): $(OBJS)
 	$(CC) $(FLAGS)  -L ${MLX} -o $@ $^ -lmlx -lXext -lX11 -lm -lz
