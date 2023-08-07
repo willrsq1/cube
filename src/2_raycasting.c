@@ -6,7 +6,7 @@
 /*   By: wruet-su <william.ruetsuquet@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/04 12:12:02 by wruet-su          #+#    #+#             */
-/*   Updated: 2023/08/07 13:19:30 by wruet-su         ###   ########.fr       */
+/*   Updated: 2023/08/08 00:41:42 by wruet-su         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,8 +83,8 @@ static int	ft_color(t_player *player, double x, double y, t_cube *cube)
 	int	color;
 
 	if (cube->map[(int)x][(int)y] == CLOSED_DOOR)
-		return (CD_COLOR);
-	if (fabs((int)x - x) >= fabs((int)y - y))
+		color = CD_COLOR;
+	else if (fabs((int)x - x) >= fabs((int)y - y))
 	{
 		if (abs((int)x) != abs((int)(x - player->dist_x * RESOLUTION)))
 			color = PASTEL_LAVENDER;
@@ -116,17 +116,14 @@ static void	draw_wall(double dist, t_cube *cube, int x, int color)
 	range = WIN_HEIGHT / dist;
 	range_start = range / 2;
 	y = WIN_HEIGHT;
-	
-		while (y > WIN_HEIGHT / 2 + range_start - range)
-			ft_pixel(cube->img, x, y--, FLOOR_COLOR);
-		while (range)
-		{
-			y = WIN_HEIGHT / 2 + range_start - range;
+	while (y > -1)
+	{
+		if (y > WIN_HEIGHT / 2 + range_start)
+			ft_pixel(cube->img, x, y, FLOOR_COLOR);
+		else if (y > WIN_HEIGHT / 2 - range_start)
 			ft_pixel(cube->img, x, y, color);
-			range--;
-		}
-		y = WIN_HEIGHT / 2 - range_start;
-		while (y + 1)
-			ft_pixel(cube->img, x, y--, CEILING_COLOR);
-	
+		else
+			ft_pixel(cube->img, x, y, CEILING_COLOR);
+		y -= 1;
+	}
 }
