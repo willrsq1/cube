@@ -6,16 +6,16 @@
 /*   By: wruet-su <william.ruetsuquet@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/03 18:58:38 by wruet-su          #+#    #+#             */
-/*   Updated: 2023/08/06 13:39:38 by wruet-su         ###   ########.fr       */
+/*   Updated: 2023/08/07 03:01:55 by wruet-su         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cube.h"
+#include "../../includes/cube.h"
 
 static int	**map_allocation(int fd, t_cube *cube);
 static void	map_size(int *nb_of_lines, int *max_lenght, int fd, t_cube *cube);
 static int	**address_allocation(int **map, int nb_of_lines, int max_lenght);
-static void	fill_map(int fd, int **map, t_cube *cube);
+static void	fill_map(int fd, t_cube *cube, int x, int y);
 
 int	**ft_map(char *path, t_cube *cube)
 {
@@ -39,7 +39,7 @@ int	**ft_map(char *path, t_cube *cube)
 		ft_free_exit(cube);
 	}
 	skip_elements(cube->fd, cube);
-	fill_map(cube->fd, map, cube);
+	fill_map(cube->fd, cube, 0, 0);
 	close(cube->fd);
 	cube->fd = -1;
 	return (map);
@@ -117,13 +117,10 @@ static int	**address_allocation(int **map, int nb_of_lines, int max_lenght)
 	return (map);
 }
 
-static void	fill_map(int fd, int **map, t_cube *cube)
+static void	fill_map(int fd, t_cube *cube, int x, int y)
 {
 	char	*buff;
-	int		x;
-	int		y;
 
-	x = 0;
 	while (1 && x < INT_MAX)
 	{
 		y = 0;
@@ -132,11 +129,11 @@ static void	fill_map(int fd, int **map, t_cube *cube)
 			break ;
 		while (buff[y] && buff[y] != '\n')
 		{
-			map[x][y] = ft_atoi_cube(buff[y]);
+			cube->map[x][y] = ft_atoi_cube(buff[y]);
 			y++;
 		}
 		while (y <= cube->map_width && y != 0)
-			map[x][y++] = END;
+			cube->map[x][y++] = END;
 		if (y == 0)
 		{
 			if (x)

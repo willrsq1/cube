@@ -6,11 +6,11 @@
 /*   By: wruet-su <william.ruetsuquet@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/06 13:36:13 by wruet-su          #+#    #+#             */
-/*   Updated: 2023/08/06 16:37:45 by wruet-su         ###   ########.fr       */
+/*   Updated: 2023/08/07 03:01:44 by wruet-su         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cube.h"
+#include "../../includes/cube.h"
 
 static bool	ft_check_vertically(int x, int y, int **map, int max)
 {
@@ -97,7 +97,7 @@ void	ft_check_map_is_closed(t_cube *cube, int **map)
 bool	ft_format(char *s)
 {
 	int	i;
-	
+
 	i = 0;
 	if (!s)
 		return (1);

@@ -6,11 +6,11 @@
 /*   By: wruet-su <william.ruetsuquet@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/05 23:56:12 by wruet-su          #+#    #+#             */
-/*   Updated: 2023/08/06 13:12:30 by wruet-su         ###   ########.fr       */
+/*   Updated: 2023/08/07 03:01:49 by wruet-su         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cube.h"
+#include "../../includes/cube.h"
 
 static char	*ft_get_texture(char *texture, t_cube *cube, char *s);
 static char	*check_error_element(char *s, t_cube *cube);
@@ -35,7 +35,7 @@ void	ft_textures_and_colors(t_cube *cube, int fd, char *s, int count)
 			cube->ceiling_color = ft_get_color(cube->ceiling_color, cube, s);
 		else if (s[0] == 'F' && s[1] == ' ' && ++count)
 			cube->floor_color = ft_get_color(cube->floor_color, cube, s);
-		else if (s[0] != '\n')
+		else if (s[0] != '\n' && count)
 			ft_error("Unallowed lign.", NULL, s, cube);
 		free(s);
 	}

@@ -1,18 +1,48 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mlx.c                                              :+:      :+:    :+:   */
+/*   1_cube.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wruet-su <william.ruetsuquet@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/03 23:13:23 by wruet-su          #+#    #+#             */
-/*   Updated: 2023/08/06 19:40:50 by wruet-su         ###   ########.fr       */
+/*   Created: 2023/08/03 18:57:24 by wruet-su          #+#    #+#             */
+/*   Updated: 2023/08/07 03:14:07 by wruet-su         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cube.h"
 
-void	launch_mlx(t_cube *cube)
+static void	ft_init(char **argv, t_cube *cube, t_img *img);
+static void	launch_mlx(t_cube *cube);
+static void	launch_window(t_cube *cube);
+
+void	ft_cube(char **argv)
+{
+	t_cube	cube;
+	t_img	img;
+
+	ft_init(argv, &cube, &img);
+	launch_mlx(&cube);
+	launch_window(&cube);
+}
+
+static void	ft_init(char **argv, t_cube *cube, t_img *img)
+{
+	ft_bzero(cube, sizeof(t_cube));
+	ft_bzero(img, sizeof(t_img));
+	cube->fd = -1;
+	cube->ceiling_color = -1;
+	cube->floor_color = -1;
+	cube->minimap = 1;
+	cube->mouse_drag = 1;
+	cube->map = ft_map(argv[1], cube);
+	print_map(cube->map, cube->map_lenght, cube);
+	ft_check_map_is_closed(cube, cube->map);
+	get_player_position(cube);
+	cube->img = img;
+}
+
+static void	launch_mlx(t_cube *cube)
 {
 	cube->mlx = mlx_init();
 	if (!cube->mlx)
@@ -41,30 +71,18 @@ void	launch_mlx(t_cube *cube)
 	}
 }
 
-void	launch_window(t_cube *cube)
+static void	launch_window(t_cube *cube)
 {
-	ft_draw(cube);
+	ft_raycasting(cube, &cube->player);
+	if (cube->door_message)
+		print_door_message(cube);
+	if (cube->minimap)
+		ft_minimap(cube);
 	mlx_put_image_to_window(cube->mlx, cube->mlx_win, cube->img->img_ptr, 0, 0);
 	mlx_destroy_image(cube->mlx, cube->img->img_ptr);
 	cube->img->img_ptr = NULL;
 	mlx_hook(cube->mlx_win, 2, 1L << 0, ft_key_hook, cube);
 	mlx_hook(cube->mlx_win, 17, 1L << 17, ft_close, cube);
+	ft_hooks_bonus(cube);
 	mlx_loop(cube->mlx);
-}
-
-void	ft_pixel(t_img *img, int x, int y, int color)
-{
-	char	*dst;
-
-	if (x >= 0 && y >= 0 && y < WIN_HEIGHT && x < WIN_WIDTH)
-	{
-		dst = img->addr + (y * img->size_line + x * (img->bpp / 8));
-		*(unsigned int *)dst = color;
-	}
-}
-
-int	ft_close(t_cube *cube)
-{
-	ft_free_exit(cube);
-	return (1);
 }

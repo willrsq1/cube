@@ -6,11 +6,11 @@
 /*   By: wruet-su <william.ruetsuquet@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 12:13:10 by wruet-su          #+#    #+#             */
-/*   Updated: 2023/08/06 00:01:23 by wruet-su         ###   ########.fr       */
+/*   Updated: 2023/08/07 03:28:05 by wruet-su         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../includes/get_next_line.h"
+#include "../../includes/get_next_line.h"
 
 size_t	ft_strlcpy_gnl(char *dest, const char *src, size_t size)
 {

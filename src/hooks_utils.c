@@ -1,46 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   hooks.c                                            :+:      :+:    :+:   */
+/*   mlx.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wruet-su <william.ruetsuquet@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/03 23:21:29 by wruet-su          #+#    #+#             */
-/*   Updated: 2023/08/06 18:12:40 by wruet-su         ###   ########.fr       */
+/*   Created: 2023/08/03 23:13:23 by wruet-su          #+#    #+#             */
+/*   Updated: 2023/08/07 03:34:24 by wruet-su         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cube.h"
 
-static void	ft_key_pressed(int key, t_cube *cube);
 static void	ft_move_right(t_cube *cube);
 static void	ft_move_left(t_cube *cube);
-static void	ft_update_image(t_cube *cube);
 
-int	ft_key_hook(int key, t_cube *cube)
-{
-	cube->player.prev_x = cube->player.x;
-	cube->player.prev_y = cube->player.y;
-	ft_key_pressed(key, cube);
-	if (ft_valid_pos(cube, cube->player.x, cube->player.y) > 0)
-	{
-		if (ft_valid_pos(cube, cube->player.prev_x, cube->player.y) <= 0)
-			cube->player.x = cube->player.prev_x;
-		else if (ft_valid_pos(cube, cube->player.x, cube->player.prev_y) <= 0)
-			cube->player.y = cube->player.prev_y;
-		else
-		{
-			cube->player.x = cube->player.prev_x;
-			cube->player.y = cube->player.prev_y;
-			return (1);
-		}
-	}
-	ft_doors(key, cube);
-	ft_update_image(cube);
-	return (1);
-}
-
-static void	ft_key_pressed(int key, t_cube *cube)
+void	ft_key_pressed(int key, t_cube *cube)
 {
 	printf("%d\n", key);
 	if (key == ESC_KEY)
@@ -63,6 +38,24 @@ static void	ft_key_pressed(int key, t_cube *cube)
 		ft_move_right(cube);
 	if (key == LEFT_ARROW)
 		ft_move_left(cube);
+}
+
+bool	ft_check_player_position(t_cube *cube)
+{
+	if (ft_valid_pos(cube, cube->player.x, cube->player.y) > 0)
+	{
+		if (ft_valid_pos(cube, cube->player.prev_x, cube->player.y) <= 0)
+			cube->player.x = cube->player.prev_x;
+		else if (ft_valid_pos(cube, cube->player.x, cube->player.prev_y) <= 0)
+			cube->player.y = cube->player.prev_y;
+		else
+		{
+			cube->player.x = cube->player.prev_x;
+			cube->player.y = cube->player.prev_y;
+			return (CANCEL_THE_MOVEMENT);
+		}
+	}
+	return (POSITION_IS_GOOD);
 }
 
 static void	ft_move_right(t_cube *cube)
@@ -93,21 +86,8 @@ static void	ft_move_left(t_cube *cube)
 	}
 }
 
-static void	ft_update_image(t_cube *cube)
+int	ft_close(t_cube *cube)
 {
-	cube->img->img_ptr = mlx_new_image(cube->mlx, WIN_WIDTH, WIN_HEIGHT);
-	if (!cube->img->img_ptr)
-	{
-		perror("at mlx_new_image in ft_update_image");
-		ft_free_exit(cube);
-	}
-	cube->img->addr = mlx_get_data_addr(cube->img->img_ptr, &cube->img->bpp, \
-		&cube->img->size_line, &cube->img->endian);
-	ft_draw(cube);
-	if (cube->door_message)
-		print_door_message(cube);
-	ft_minimap(cube);
-	mlx_put_image_to_window(cube->mlx, cube->mlx_win, cube->img->img_ptr, 0, 0);
-	mlx_destroy_image(cube->mlx, cube->img->img_ptr);
-	cube->img->img_ptr = NULL;
+	ft_free_exit(cube);
+	return (1);
 }

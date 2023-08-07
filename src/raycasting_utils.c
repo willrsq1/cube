@@ -6,7 +6,7 @@
 /*   By: wruet-su <william.ruetsuquet@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/04 22:57:45 by wruet-su          #+#    #+#             */
-/*   Updated: 2023/08/05 23:25:00 by wruet-su         ###   ########.fr       */
+/*   Updated: 2023/08/07 03:47:10 by wruet-su         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,4 +32,36 @@ double	ft_distance(double x, double y, double x0, double y0)
 		y *= -1;
 	dist = sqrt(x * x + y * y);
 	return (dist);
+}
+
+void	ft_pixel(t_img *img, int x, int y, int color)
+{
+	char	*dst;
+
+	if (x >= 0 && y >= 0 && y < WIN_HEIGHT && x < WIN_WIDTH)
+	{
+		dst = img->addr + (y * img->size_line + x * (img->bpp / 8));
+		*(unsigned int *)dst = color;
+	}
+}
+
+void	ft_background(t_cube *cube)
+{
+	int	i;
+	int	y;
+
+	i = -1;
+	while (++i < WIN_HEIGHT / 2)
+	{
+		y = -1;
+		while (++y < WIN_WIDTH)
+			ft_pixel(cube->img, y, i, CEILING_COLOR);
+	}
+	while (i < WIN_HEIGHT)
+	{
+		y = -1;
+		while (++y < WIN_WIDTH)
+			ft_pixel(cube->img, y, i, FLOOR_COLOR);
+		i++;
+	}
 }

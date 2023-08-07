@@ -16,21 +16,24 @@ HEADER_BONUS = Philosophers_bonus/includes
 SRC_PATH_BONUS  = Philosophers_bonus/src
 
 ### SOURCE FILES ###
-SOURCES =     		main.c \
-					cube.c \
-					map.c \
-					map_utils.c \
-					map_error.c \
-					utils.c \
-					mlx.c \
-					hooks.c \
-					raycasting.c \
+SOURCES =     		0_main.c \
+					1_cube.c \
+					2_raycasting.c \
+					3_hooks.c \
+					cube_utils.c \
+					hooks_utils.c \
 					raycasting_utils.c \
-					player_init.c \
-					libft/gnl/get_next_line.c \
-					libft/gnl/get_next_line_utils.c \
-					doors.c \
-					minimap.c \
+					init/map.c \
+					init/map_utils.c \
+					init/map_error.c \
+					init/player_init.c \
+					gnl/get_next_line.c \
+					gnl/get_next_line_utils.c \
+					bonus/doors_bonus.c \
+					bonus/doors_message_bonus.c \
+					bonus/drawing_functs_bonus.c \
+					bonus/minimap_bonus.c \
+					bonus/hooks_bonus.c \
 
 
 SOURCES_BONUS =    	main.c \
@@ -63,12 +66,13 @@ WHITE       = \033[1;37m
 ### RULES ###
 
 all: $(NAME) mlx
+	./cube maps/arbesa.cub
 
 $(NAME): $(OBJS)
 	$(CC) $(FLAGS)  -L ${MLX} -o $@ $^ -lmlx -lXext -lX11 -lm -lz
 	@echo "$(GREEN)Project successfully compiled"
 
-$(OBJ_PATH)/%.o: $(SRC_PATH)/%.c $(HEADER)/cube.h
+$(OBJ_PATH)/%.o: $(SRC_PATH)/%.c $(HEADER)/*.h
 	@mkdir -p $(@D)
 	@$(CC) $(FLAGS) -c -o $@ $<
 	@echo "$(BLUE)Creating object file -> $(WHITE)$(notdir $@)... $(RED)[Done]$(NOC)"
@@ -91,7 +95,7 @@ $(NAME_BONUS): $(OBJS_BONUS)
 	$(CC) $(FLAGS) -o $@ $^
 	@echo "$(GREEN)Project successfully compiled"
 
-$(OBJ_PATH_BONUS)/%.o: $(SRC_PATH_BONUS)/%.c $(HEADER_BONUS)/philosophers_bonus.h
+$(OBJ_PATH_BONUS)/%.o: $(SRC_PATH_BONUS)/%.c $(HEADER_BONUS)/*.h
 	@mkdir -p $(@D)
 	@$(CC) $(FLAGS) -c -o $@ $<
 	@echo "$(BLUE)Creating object file -> $(WHITE)$(notdir $@)... $(RED)[Done]$(NOC)"

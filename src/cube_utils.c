@@ -6,13 +6,29 @@
 /*   By: wruet-su <william.ruetsuquet@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/03 18:57:56 by wruet-su          #+#    #+#             */
-/*   Updated: 2023/08/06 13:23:49 by wruet-su         ###   ########.fr       */
+/*   Updated: 2023/08/07 03:32:19 by wruet-su         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cube.h"
 
 static void	ft_free_textures(t_cube *cube);
+
+int	ft_valid_pos(t_cube *cube, double x, double y)
+{
+	if (x < 0 || \
+		y < 0 || \
+		y > cube->map_width || \
+		x > cube->map_lenght || \
+		cube->map[(int)x][(int)y] == END || \
+		cube->map[(int)x][(int)y] == WALL)
+		return (WALL);
+	if (cube->map[(int)x][(int)y] == CLOSED_DOOR)
+		return (CLOSED_DOOR);
+	if (cube->map[(int)x][(int)y] == OPENED_DOOR)
+		return (OPENED_DOOR);
+	return (0);
+}
 
 void	ft_free_exit(t_cube *cube)
 {
@@ -49,22 +65,6 @@ static void	ft_free_textures(t_cube *cube)
 		free(cube->text_west);
 	if (cube->text_east)
 		free(cube->text_east);
-}
-
-int	ft_valid_pos(t_cube *cube, double x, double y)
-{
-	if (x < 0 || \
-		y < 0 || \
-		y > cube->map_width || \
-		x > cube->map_lenght || \
-		cube->map[(int)x][(int)y] == END || \
-		cube->map[(int)x][(int)y] == WALL)
-		return (WALL);
-	if (cube->map[(int)x][(int)y] == CLOSED_DOOR)
-		return (CLOSED_DOOR);
-	if (cube->map[(int)x][(int)y] == OPENED_DOOR)
-		return (OPENED_DOOR);
-	return (0);
 }
 
 void	ft_error(char *s1, char *s2, char *s3, t_cube *cube)

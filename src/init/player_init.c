@@ -6,11 +6,11 @@
 /*   By: wruet-su <william.ruetsuquet@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/03 20:30:09 by wruet-su          #+#    #+#             */
-/*   Updated: 2023/08/05 03:40:01 by wruet-su         ###   ########.fr       */
+/*   Updated: 2023/08/07 03:02:00 by wruet-su         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cube.h"
+#include "../../includes/cube.h"
 
 static void	get_player_direction(t_cube *cube, char c);
 
@@ -38,6 +38,32 @@ void	get_player_position(t_cube *cube)
 		}
 		x++;
 	}
+}
+
+void	print_map(int **map, int map_lenght, t_cube *cube)
+{
+	int		i;
+	int		y;
+	int		letter_number;
+
+	i = 0;
+	letter_number = 0;
+	while (i < map_lenght)
+	{
+		y = 0;
+		while (map[i][y] != END)
+		{
+			if (map[i][y] > 31 && ++letter_number)
+				printf("%c", map[i][y]);
+			else
+				printf("%d", map[i][y]);
+			y++;
+		}
+		printf("\n");
+		i++;
+	}
+	if (letter_number != 1)
+		ft_error("Error with starting position", NULL, NULL, cube);
 }
 
 static void	get_player_direction(t_cube *cube, char c)
