@@ -6,7 +6,7 @@
 /*   By: wruet-su <william.ruetsuquet@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/04 12:12:02 by wruet-su          #+#    #+#             */
-/*   Updated: 2023/08/08 00:41:42 by wruet-su         ###   ########.fr       */
+/*   Updated: 2023/08/08 00:54:32 by wruet-su         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,8 +115,8 @@ static void	draw_wall(double dist, t_cube *cube, int x, int color)
 		dist = 1;
 	range = WIN_HEIGHT / dist;
 	range_start = range / 2;
-	y = WIN_HEIGHT;
-	while (y > -1)
+	y = 0;
+	while (y <= WIN_HEIGHT)
 	{
 		if (y > WIN_HEIGHT / 2 + range_start)
 			ft_pixel(cube->img, x, y, FLOOR_COLOR);
@@ -124,6 +124,6 @@ static void	draw_wall(double dist, t_cube *cube, int x, int color)
 			ft_pixel(cube->img, x, y, color);
 		else
 			ft_pixel(cube->img, x, y, CEILING_COLOR);
-		y -= 1;
+		y += 1;
 	}
 }
