@@ -6,7 +6,7 @@
 /*   By: wruet-su <william.ruetsuquet@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 12:32:36 by marvin            #+#    #+#             */
-/*   Updated: 2023/08/07 03:00:02 by wruet-su         ###   ########.fr       */
+/*   Updated: 2023/08/08 16:35:53 by wruet-su         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,28 +31,23 @@ static void	draw(t_draw plot, int color, t_img *img);
 
 void	draw_pov_player(t_cube *cube, t_player *player, int color, int coef)
 {
-	double	angle_save;
 	t_draw	plot;
-	int		a;
+	double	angle;
+	int		pixel_column;
 
-	fix_angle(player);
-	angle_save = player->direction;
-	a = 0;
-	player->color = BLUE;
-	player->direction -= player->fov * 0.92;
-	fix_angle(player);
+	fix_angle(&player->direction);
+	pixel_column = 0;
+	angle = player->direction + player->fov / 2;
 	plot.x0 = player->x * coef;
 	plot.y0 = player->y * coef;
-	while (a <= WIN_WIDTH)
+	while (pixel_column <= WIN_WIDTH)
 	{
-		plot.x1 = plot.x0 + coef * cos(player->direction);
-		plot.y1 = plot.y0 + coef * sin(player->direction);
+		angle -= player->fov / WIN_WIDTH;
+		plot.x1 = plot.x0 + coef * 2 * cos(angle);
+		plot.y1 = plot.y0 + coef * 2 * sin(angle);
 		draw(plot, color, cube->img);
-		player->direction += player->fov / WIN_WIDTH * 1.8;
-		fix_angle(player);
-		a++;
+		pixel_column++;
 	}
-	player->direction = angle_save;
 }
 
 static void	draw(t_draw plot, int color, t_img *img)

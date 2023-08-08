@@ -6,7 +6,7 @@
 /*   By: wruet-su <william.ruetsuquet@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 13:20:38 by wruet-su          #+#    #+#             */
-/*   Updated: 2023/08/07 15:20:16 by wruet-su         ###   ########.fr       */
+/*   Updated: 2023/08/08 04:35:44 by wruet-su         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,20 +21,44 @@
 # include <math.h>
 # include "../mlx_linux/mlx.h"
 
-# define PLAYER_POSITION -42
+# define CLOSED_DOOR 2
+# define OPENED_DOOR -2
+
+# define CD_COLOR 0x98FF98
+# define OP_COLOR 0xADD8E6
+
+# define X 1
+# define CANCEL_THE_MOVEMENT 1
+# define POSITION_IS_GOOD 0
+# define ESC_KEY 65307
+# define UP_ARROW 65362
+# define LEFT_ARROW 65361
+# define DOWN_ARROW 65364
+# define RIGHT_ARROW 65363
+# define A_KEY 97
+# define Z_KEY 122
+# define M_KEY 109
+# define P_KEY 112
+# define N_KEY 98
+# define B_KEY 110
+# define PLUS_KEY 61
+# define MINUS_KEY 45
+# define SPACE_KEY 32
+
 # define END -1
 # define FAIL -3
 # define PI2 1.570796000000000081087137004942633211612701416015625
 # define PI  3.141592999999999857863031138549558818340301513671875
 # define PII 6.283184999999999575948095298372209072113037109375
 # define PI3 4.7123889923095703125
-# define FOV 1
+# define FOV 1.7072000
 # define WALL 1
 # define RESOLUTION 0.0001
 # define WIN_WIDTH 1300
 # define WIN_HEIGHT 800
 # define CEILING_COLOR 0x00FFFF
 # define FLOOR_COLOR 0xFFD700
+
 # define RED 0xFF0000
 # define GREEN 0x00FF00
 # define BLUE 0x0000FF
@@ -85,24 +109,5 @@
 # define ROSEWOOD       0x65000B
 # define TOMATO_RED     0xFF6347
 # define VERMILION      0xE34234
-
-# define CLOSED_DOOR 2
-# define OPENED_DOOR -2
-
-# define CD_COLOR 0x98FF98
-# define OP_COLOR 0xADD8E6
-
-# define X 1
-# define CANCEL_THE_MOVEMENT 1
-# define POSITION_IS_GOOD 0
-# define ESC_KEY 65307
-# define UP_ARROW 65362
-# define LEFT_ARROW 65361
-# define DOWN_ARROW 65364
-# define RIGHT_ARROW 65363
-# define A_KEY 97
-# define Z_KEY 122
-# define M_KEY 109
-# define P_KEY 112
 
 #endif

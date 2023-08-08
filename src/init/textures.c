@@ -6,7 +6,7 @@
 /*   By: wruet-su <william.ruetsuquet@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/05 23:56:12 by wruet-su          #+#    #+#             */
-/*   Updated: 2023/08/07 14:01:14 by wruet-su         ###   ########.fr       */
+/*   Updated: 2023/08/08 16:25:34 by wruet-su         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 static char	*ft_get_texture(char *texture, t_cube *cube, char *s);
 static char	*check_error_element(char *s, t_cube *cube);
-static int	ft_get_color(int color, t_cube *cube, char *s);
 
 void	ft_textures_and_colors(t_cube *cube, int fd, char *s, int count)
 {
@@ -36,7 +35,7 @@ void	ft_textures_and_colors(t_cube *cube, int fd, char *s, int count)
 		else if (s[0] == 'F' && s[1] == ' ' && ++count)
 			cube->floor_color = ft_get_color(cube->floor_color, cube, s);
 		else if (s[0] != '\n' && count)
-			ft_error("Unallowed lign.", NULL, s, cube);
+			ft_error("Unallowed lign: ", s, s, cube);
 		free(s);
 	}
 }
@@ -50,11 +49,11 @@ static char	*check_error_element(char *s, t_cube *cube)
 	while (s[i] && s[i] != ' ')
 		i++;
 	if (!s[i] || i > 2)
-		ft_error("A line is not formated properly.", NULL, s, cube);
+		ft_error("This line is not formated properly ", s, s, cube);
 	while (s[i] && s[i] == ' ')
 		i++;
 	if (!s[i] || s[i] == '\n')
-		ft_error("An element doesn't contain a file.", NULL, s, cube);
+		ft_error("This element doesn't contain a file: ", s, s, cube);
 	texture = ft_strdup(&s[i]);
 	if (!texture)
 	{
@@ -69,7 +68,7 @@ static char	*ft_get_texture(char *texture, t_cube *cube, char *s)
 	int	fd;
 
 	if (texture)
-		ft_error("The element ", " has already been defined.", s, cube);
+		ft_error("This element has multiple definitions: ", s, s, cube);
 	s[ft_strlen(s) - 1] = '\0';
 	texture = check_error_element(s, cube);
 	fd = open(texture, O_RDONLY);
@@ -84,13 +83,4 @@ static char	*ft_get_texture(char *texture, t_cube *cube, char *s)
 	}
 	texture[ft_strlen(texture) - 1] = '\0';
 	return (texture);
-}
-
-static int	ft_get_color(int color, t_cube *cube, char *s)
-{
-	if (color != -1)
-		ft_error("Multiple definition of colors.", NULL, s, cube);
-	if (cube && s)
-		return (WHITE);
-	return (WHITE);
 }

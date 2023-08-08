@@ -6,7 +6,7 @@
 /*   By: wruet-su <william.ruetsuquet@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/06 17:41:43 by wruet-su          #+#    #+#             */
-/*   Updated: 2023/08/07 03:00:06 by wruet-su         ###   ########.fr       */
+/*   Updated: 2023/08/08 16:36:23 by wruet-su         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	ft_minimap(t_cube *cube)
 		}
 		y++;
 	}
-	draw_pov_player(cube, &cube->player, NAVY_BLUE, coef);
+	draw_pov_player(cube, &cube->player, CYAN, coef);
 	ft_draw_player(coef, cube->player.x, cube->player.y, cube->img);
 }
 

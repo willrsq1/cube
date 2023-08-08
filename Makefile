@@ -24,9 +24,11 @@ SOURCES =     		0_main.c \
 					hooks_utils.c \
 					raycasting_utils.c \
 					init/map.c \
-					init/textures_and_colors.c \
+					init/textures.c \
+					init/colors.c \
 					init/map_error.c \
 					init/player_init.c \
+					init/ft_split.c \
 					gnl/get_next_line.c \
 					gnl/get_next_line_utils.c \
 					bonus/doors_bonus.c \

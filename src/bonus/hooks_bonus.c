@@ -6,7 +6,7 @@
 /*   By: wruet-su <william.ruetsuquet@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 03:03:59 by wruet-su          #+#    #+#             */
-/*   Updated: 2023/08/07 23:44:59 by wruet-su         ###   ########.fr       */
+/*   Updated: 2023/08/08 04:03:03 by wruet-su         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,46 @@ void	ft_hooks_bonus(t_cube *cube)
 	mlx_mouse_hook(cube->mlx_win, handle_mouse_click, cube);
 }
 
+void	weird_ft(t_cube *cube)
+{
+	size_t	i;
+	int		height;
+
+	height = cube->height;
+	i = 135;
+	while (i > 110)
+	{
+		if (i > 120)
+			cube->height += i / 15 + 10;
+		else
+			cube->height += i % 110;
+		ft_update_image(cube);
+		i--;
+	}
+	while (cube->height > height)
+	{
+		cube->height -= 10;
+		ft_update_image(cube);
+	}
+	cube->height = height;
+}
+
 void	ft_key_hook_bonus(int key, t_cube *cube)
 {
 	if (key == M_KEY)
 		cube->minimap = (cube->minimap + 1) % 2;
 	if (key == P_KEY)
 		cube->mouse_drag = (cube->mouse_drag + 1) % 2;
+	if (key == PLUS_KEY && cube->player.fov > 0)
+		cube->player.fov -= 0.011;
+	if (key == MINUS_KEY && cube->player.fov < PII)
+		cube->player.fov += 0.011;
+	if (key == SPACE_KEY)
+		weird_ft(cube);
+	if (key == B_KEY && cube->height < WIN_HEIGHT)
+		cube->height += 10;
+	if (key == N_KEY && cube->height > -WIN_HEIGHT)
+		cube->height -= 10;
 	ft_doors(key, cube);
 }
 

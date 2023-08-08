@@ -6,7 +6,7 @@
 /*   By: wruet-su <william.ruetsuquet@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/03 18:57:50 by wruet-su          #+#    #+#             */
-/*   Updated: 2023/08/07 13:21:50 by wruet-su         ###   ########.fr       */
+/*   Updated: 2023/08/08 16:25:47 by wruet-su         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,10 @@ typedef struct s_player
 	double		y;
 	double		prev_x;
 	double		prev_y;
-	double		dist_x_start;
-	double		dist_y_start;
-	double		dist_x;
-	double		dist_y;
+	double		vector_x_start;
+	double		vector_y_start;
+	double		vector_x;
+	double		vector_y;
 	double		direction;
 	int			color;
 	t_img		*texture;
@@ -64,6 +64,7 @@ typedef struct s_cube
 	int			mouse_x;
 	int			mouse_y;
 	bool		mouse_drag;
+	int			height;
 }	t_cube;
 
 void	ft_cube(char **argv);
@@ -84,7 +85,6 @@ int		ft_key_hook(int key, t_cube *cube);
 
 void	ft_raycasting(t_cube *cube, t_player *player);
 
-void	fix_angle(t_player *player);
 double	ft_distance(double x, double y, double x0, double y0);
 
 void	ft_error(char *s1, char *s2, char *s3, t_cube *cube);
@@ -102,8 +102,12 @@ void	ft_check_map_is_closed(t_cube *cube, int **map);
 bool	ft_format(char *s);
 
 void	print_door_message(t_cube *cube);
+void	fix_angle(double *angle);
 
 void	ft_minimap(t_cube *cube);
+char	**ft_split(char const *s, char c);
+int		ft_get_color(int color, t_cube *cube, char *s);
+void	ft_free_tab(char **tab);
 
 void	print_door_message(t_cube *cube);
 void	print_s(int x, int y, t_cube *cube, int color);

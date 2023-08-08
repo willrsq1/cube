@@ -6,7 +6,7 @@
 /*   By: wruet-su <william.ruetsuquet@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/03 18:58:38 by wruet-su          #+#    #+#             */
-/*   Updated: 2023/08/07 03:01:55 by wruet-su         ###   ########.fr       */
+/*   Updated: 2023/08/08 16:20:18 by wruet-su         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ static void	map_size(int *nb_of_lines, int *max_lenght, int fd, t_cube *cube)
 			if (!(buff[y] == 'N' || buff[y] == 'S' || buff[y] == 'E' || \
 				buff[y] == 'W' || buff[y] == '0' || buff[y] == '1' || \
 				buff[y] == ' ' || buff[y] == 'D'))
-				ft_error("Unallowed character", " in map.", buff, cube);
+				ft_error("Unallowed character in lign: ", buff, buff, cube);
 			y++;
 		}
 		if (y > *max_lenght)

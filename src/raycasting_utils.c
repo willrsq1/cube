@@ -6,18 +6,18 @@
 /*   By: wruet-su <william.ruetsuquet@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/04 22:57:45 by wruet-su          #+#    #+#             */
-/*   Updated: 2023/08/07 13:19:14 by wruet-su         ###   ########.fr       */
+/*   Updated: 2023/08/08 01:49:52 by wruet-su         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cube.h"
 
-void	fix_angle(t_player *player)
+void	fix_angle(double *angle)
 {
-	if (player->direction >= PII)
-		player->direction -= PII;
-	if (player->direction <= 0)
-		player->direction += PII;
+	if (*angle >= PII)
+		*angle -= PII;
+	if (*angle <= 0)
+		*angle += PII;
 }
 
 double	ft_distance(double x, double y, double x0, double y0)

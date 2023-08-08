@@ -6,7 +6,7 @@
 /*   By: wruet-su <william.ruetsuquet@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/03 23:13:23 by wruet-su          #+#    #+#             */
-/*   Updated: 2023/08/07 13:10:35 by wruet-su         ###   ########.fr       */
+/*   Updated: 2023/08/08 01:56:11 by wruet-su         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,9 @@ void	ft_key_pressed(int key, t_cube *cube)
 	if (key == ESC_KEY)
 		ft_free_exit(cube);
 	if (key == A_KEY)
-		cube->player.direction -= 0.1;
+		cube->player.direction -= 0.07;
 	if (key == Z_KEY)
-		cube->player.direction += 0.1;
+		cube->player.direction += 0.07;
 	if (key == UP_ARROW)
 	{
 			cube->player.x += cos(cube->player.direction) / 10;
