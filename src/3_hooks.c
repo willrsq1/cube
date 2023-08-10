@@ -6,7 +6,7 @@
 /*   By: wruet-su <william.ruetsuquet@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/03 23:21:29 by wruet-su          #+#    #+#             */
-/*   Updated: 2023/08/07 13:32:16 by wruet-su         ###   ########.fr       */
+/*   Updated: 2023/08/10 22:11:37 by wruet-su         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ int	ft_key_hook(int key, t_cube *cube)
 		return (1);
 	ft_key_hook_bonus(key, cube);
 	ft_update_image(cube);
+	ft_destroy_image(cube);
 	return (1);
 }
 
@@ -41,7 +42,17 @@ void	ft_update_image(t_cube *cube)
 	}
 	ft_raycasting(cube, &cube->player);
 	ft_update_image_bonus(cube);
+}
+
+void	ft_destroy_image(t_cube *cube)
+{
 	mlx_put_image_to_window(cube->mlx, cube->mlx_win, cube->img->img_ptr, 0, 0);
 	mlx_destroy_image(cube->mlx, cube->img->img_ptr);
 	cube->img->img_ptr = NULL;
+}
+
+int	ft_close(t_cube *cube)
+{
+	ft_free_exit(cube);
+	return (1);
 }

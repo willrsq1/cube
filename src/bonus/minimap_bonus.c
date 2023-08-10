@@ -6,14 +6,13 @@
 /*   By: wruet-su <william.ruetsuquet@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/06 17:41:43 by wruet-su          #+#    #+#             */
-/*   Updated: 2023/08/08 16:36:23 by wruet-su         ###   ########.fr       */
+/*   Updated: 2023/08/10 17:48:52 by wruet-su         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cube.h"
 
 static void	ft_draw_square(int size, int y, int x, t_cube *cube);
-static void	ft_draw_player(int size, double y, double x, t_img *img);
 
 void	ft_minimap(t_cube *cube)
 {
@@ -24,7 +23,7 @@ void	ft_minimap(t_cube *cube)
 	y = 0;
 	coef = WIN_WIDTH / 100;
 	if (coef * cube->map_width > WIN_WIDTH)
-		coef = WIN_HEIGHT / cube->map_width * 1.5;
+		coef = WIN_HEIGHT / cube->map_width * 2;
 	while (y < cube->map_lenght)
 	{
 		x = 0;
@@ -35,8 +34,8 @@ void	ft_minimap(t_cube *cube)
 		}
 		y++;
 	}
-	draw_pov_player(cube, &cube->player, CYAN, coef);
-	ft_draw_player(coef, cube->player.x, cube->player.y, cube->img);
+	draw_pov_player(cube, &cube->player, RED, coef);
+	put_my_img_to_img((cube->player.y - 1) * coef, (cube->player.x - 1.5) * coef, cube->sprites[MINNIE], cube->img);
 }
 
 static void	ft_draw_square(int size, int y, int x, t_cube *cube)
@@ -66,28 +65,4 @@ static void	ft_draw_square(int size, int y, int x, t_cube *cube)
 			i++;
 		}
 	}
-}
-
-static void	ft_draw_player(int size, double y, double x, t_img *img)
-{
-	int	i;
-	int	m;
-
-	m = 0;
-	i = -2;
-	while (++i < 4)
-	{
-		ft_pixel(img, x * size + m, y * size + m + i, RED);
-		ft_pixel(img, x * size + m + 1, y * size + m + i, RED);
-	}
-	ft_pixel(img, x * size + m - 1, y * size - 1, RED);
-	ft_pixel(img, x * size + m + 2, y * size - 1, RED);
-	ft_pixel(img, x * size + m - 1, y * size, RED);
-	ft_pixel(img, x * size + m + 2, y * size, RED);
-	ft_pixel(img, x * size + m - 1, y * size + 1, RED);
-	ft_pixel(img, x * size + m - 2, y * size + 1, RED);
-	ft_pixel(img, x * size + m + 2, y * size + 1, RED);
-	ft_pixel(img, x * size + m + 3, y * size + 1, RED);
-	ft_pixel(img, x * size + m - 1, y * size + 2, RED);
-	ft_pixel(img, x * size + m + 2, y * size + 2, RED);
 }

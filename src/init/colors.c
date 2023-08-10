@@ -6,7 +6,7 @@
 /*   By: wruet-su <william.ruetsuquet@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 16:25:12 by wruet-su          #+#    #+#             */
-/*   Updated: 2023/08/08 16:28:58 by wruet-su         ###   ########.fr       */
+/*   Updated: 2023/08/10 22:24:14 by wruet-su         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	ft_get_color(int color, t_cube *cube, char *s)
 {
 	int		i;
 	char	**tab;
-	
+
 	if (color != -1)
 		ft_error("Multiple definitions for this element: ", s, s, cube);
 	i = 2;

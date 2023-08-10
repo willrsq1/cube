@@ -6,7 +6,7 @@
 /*   By: wruet-su <william.ruetsuquet@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/03 23:13:23 by wruet-su          #+#    #+#             */
-/*   Updated: 2023/08/08 01:56:11 by wruet-su         ###   ########.fr       */
+/*   Updated: 2023/08/10 22:11:34 by wruet-su         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,10 +84,4 @@ static void	ft_move_left(t_cube *cube)
 		cube->player.x += cos(cube->player.direction + PI / 2) / 10;
 		cube->player.y += sin(cube->player.direction + PI / 2) / 10;
 	}
-}
-
-int	ft_close(t_cube *cube)
-{
-	ft_free_exit(cube);
-	return (1);
 }

@@ -1,11 +1,11 @@
 
 ### COMPILATION ###
-CC      = gcc
+CC      = cc
 FLAGS  = -Wall -Wextra -Werror
 
 ### EXECUTABLE ###
-NAME   = cube
-NAME_BONUS = philo_bonus
+NAME   = cub3D
+NAME_BONUS = cub3D_bonus
 
 ### INCLUDES ###
 OBJ_PATH  = objs
@@ -20,6 +20,7 @@ SOURCES =     		0_main.c \
 					1_cube.c \
 					2_raycasting.c \
 					3_hooks.c \
+					4_images.c \
 					cube_utils.c \
 					hooks_utils.c \
 					raycasting_utils.c \
@@ -36,6 +37,7 @@ SOURCES =     		0_main.c \
 					bonus/drawing_functs_bonus.c \
 					bonus/minimap_bonus.c \
 					bonus/hooks_bonus.c \
+					bonus/enemy.c \
 
 
 SOURCES_BONUS =    	main.c \
@@ -68,10 +70,10 @@ WHITE       = \033[1;37m
 ### RULES ###
 
 all: $(NAME) mlx
-	./cube maps/map.cub
+
 
 $(NAME): $(OBJS)
-	$(CC) $(FLAGS)  -L ${MLX} -o $@ $^ -lmlx -lXext -lX11 -lm -lz
+	$(CC) $(FLAGS) -L ${MLX} -o $@ $^ -lmlx -lXext -lX11 -lm -lz
 	@echo "$(GREEN)Project successfully compiled"
 
 $(OBJ_PATH)/%.o: $(SRC_PATH)/%.c $(HEADER)/*.h
@@ -94,7 +96,7 @@ fclean:
 bonus: $(NAME_BONUS)
 	
 $(NAME_BONUS): $(OBJS_BONUS)
-	$(CC) $(FLAGS) -o $@ $^
+	$(CC) $(FLAGS) -L ${MLX} -o $@ $^ -lmlx -lXext -lX11 -lm -lz
 	@echo "$(GREEN)Project successfully compiled"
 
 $(OBJ_PATH_BONUS)/%.o: $(SRC_PATH_BONUS)/%.c $(HEADER_BONUS)/*.h
@@ -106,9 +108,11 @@ norminette:
 	@norminette src/ includes/
 
 mlx:
-	@cd $(MLX) && $(MAKE)
+	@make --no-print-directory -C ${MLX}
 
 re: fclean
 	@$(MAKE) all
 
-.PHONY: re fclean clean norminette bonus mlx
+# leaks: ${NAME} all
+# 	valgrind --leak-check=full --show-leak-kinds=all --track-fds=yes -s ./cub3D maps/arbesa.cub
+.PHONY: re fclean clean norminette bonus mlx all

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   textures_and_colors.c                              :+:      :+:    :+:   */
+/*   textures.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wruet-su <william.ruetsuquet@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/05 23:56:12 by wruet-su          #+#    #+#             */
-/*   Updated: 2023/08/08 16:25:34 by wruet-su         ###   ########.fr       */
+/*   Updated: 2023/08/10 22:24:20 by wruet-su         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,29 +40,6 @@ void	ft_textures_and_colors(t_cube *cube, int fd, char *s, int count)
 	}
 }
 
-static char	*check_error_element(char *s, t_cube *cube)
-{
-	int		i;
-	char	*texture;
-
-	i = 0;
-	while (s[i] && s[i] != ' ')
-		i++;
-	if (!s[i] || i > 2)
-		ft_error("This line is not formated properly ", s, s, cube);
-	while (s[i] && s[i] == ' ')
-		i++;
-	if (!s[i] || s[i] == '\n')
-		ft_error("This element doesn't contain a file: ", s, s, cube);
-	texture = ft_strdup(&s[i]);
-	if (!texture)
-	{
-		free(s);
-		ft_free_exit(cube);
-	}
-	return (texture);
-}
-
 static char	*ft_get_texture(char *texture, t_cube *cube, char *s)
 {
 	int	fd;
@@ -81,6 +58,29 @@ static char	*ft_get_texture(char *texture, t_cube *cube, char *s)
 		free(s);
 		ft_free_exit(cube);
 	}
-	texture[ft_strlen(texture) - 1] = '\0';
+	return (texture);
+}
+
+static char	*check_error_element(char *s, t_cube *cube)
+{
+	int		i;
+	char	*texture;
+
+	i = 0;
+	while (s[i] && s[i] != ' ')
+		i++;
+	if (!s[i] || i > 2)
+		ft_error("This line is not formated properly ", s, s, cube);
+	while (s[i] && s[i] == ' ')
+		i++;
+	if (!s[i] || s[i] == '\n')
+		ft_error("This element doesn't contain a file: ", s, s, cube);
+	texture = ft_strdup(&s[i]);
+	printf("%s\n", texture);
+	if (!texture)
+	{
+		free(s);
+		ft_free_exit(cube);
+	}
 	return (texture);
 }

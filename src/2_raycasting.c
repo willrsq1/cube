@@ -6,7 +6,7 @@
 /*   By: wruet-su <william.ruetsuquet@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/04 12:12:02 by wruet-su          #+#    #+#             */
-/*   Updated: 2023/08/08 16:17:21 by wruet-su         ###   ########.fr       */
+/*   Updated: 2023/08/10 22:37:13 by wruet-su         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 static double	get_dist(t_cube *cube, t_player *player, double x, double y);
 static void		get_exact_coords(double *x, double *y, t_cube *cube);
-static void		draw_wall(double dist, t_cube *cube, int x, int color);
-static int		ft_color(t_player *player, double x, double y, t_cube *cube);
+static void		ft_texture(t_player *player, double x, double y, t_cube *cube);
+static void		draw_wall(double dist, t_cube *cube, int x);
 
 void	ft_raycasting(t_cube *cube, t_player *player)
 {
@@ -33,7 +33,7 @@ void	ft_raycasting(t_cube *cube, t_player *player)
 		player->vector_y = sin(angle) * 0.01;
 		distance = get_dist(cube, player, player->x, player->y);
 		distance *= cos(player->direction - angle) * player->fov;
-		draw_wall(distance, cube, pixel_column, player->color);
+		draw_wall(distance, cube, pixel_column);
 		pixel_column++;
 	}
 }
@@ -48,7 +48,7 @@ static double	get_dist(t_cube *cube, t_player *player, double x, double y)
 		y += player->vector_y;
 	}
 	get_exact_coords(&x, &y, cube);
-	player->color = ft_color(player, x, y, cube);
+	ft_texture(player, x, y, cube);
 	distance = ft_distance(x, y, player->x, player->y);
 	return (distance);
 }
@@ -74,34 +74,33 @@ static void	get_exact_coords(double *x, double *y, t_cube *cube)
 	*y += cube->player.vector_y * RESOLUTION;
 }
 
-static int	ft_color(t_player *player, double x, double y, t_cube *cube)
+static void	ft_texture(t_player *player, double x, double y, t_cube *cube)
 {
-	int	color;
-
+	player->x_wall = fabs((int)x - x);
+	if (abs((int)x) != abs((int)(x - player->vector_x * RESOLUTION)))
+		player->x_wall = fabs((int)y - y);
 	if (cube->map[(int)x][(int)y] == CLOSED_DOOR)
-		color = CD_COLOR;
+		cube->id = BRICK;
 	else if (fabs((int)x - x) >= fabs((int)y - y))
 	{
 		if (abs((int)x) != abs((int)(x - player->vector_x * RESOLUTION)))
-			color = PASTEL_LAVENDER;
+			cube->id = NORTH;
 		else
-			color = PASTEL_PEACH;
+			cube->id = EAST;
 	}
 	else
 	{
+		cube->id = WEST;
 		if (abs((int)x) != abs((int)(x - player->vector_x * RESOLUTION)))
-			color = PASTEL_PURPLE;
-		else
-			color = PASTEL_PINK;
+			cube->id = SOUTH;
 	}
 	x -= player->vector_x * RESOLUTION;
 	y -= player->vector_y * RESOLUTION;
 	if (cube->map[(int)(x)][(int)(y)] == OPENED_DOOR)
-		color = OP_COLOR;
-	return (color);
+		cube->id = DOOR;
 }
 
-static void	draw_wall(double dist, t_cube *cube, int x, int color)
+static void	draw_wall(double dist, t_cube *cube, int x)
 {
 	int		wall_size;
 	int		half_of_wall_size;
@@ -117,10 +116,10 @@ static void	draw_wall(double dist, t_cube *cube, int x, int color)
 		ft_pixel(cube->img, x, y, cube->ceiling_color);
 		y++;
 	}
-	while (y <= WIN_HEIGHT / 2 + half_of_wall_size + cube->height)
+	while (y <= WIN_HEIGHT / 2 + half_of_wall_size + cube->height - 1)
 	{
-		ft_pixel(cube->img, x, y, color);
-		y += 1;
+		ft_wall_pixel(cube, x, y, wall_size);
+		y++;
 	}
 	while (y <= WIN_HEIGHT)
 	{

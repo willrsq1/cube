@@ -18,6 +18,6 @@ files=(
 for file in "${files[@]}"; do
     full_path="maps/$file"  # Ajoute le préfixe "maps/" au nom de fichier
     echo "Testing $full_path..."
-    ./cube "$full_path"
+    valgrind ./cube "$full_path"
     echo "============================================="
 done

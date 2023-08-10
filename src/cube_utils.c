@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   cube_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wruet-su <william.ruetsuquet@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/03 18:57:56 by wruet-su          #+#    #+#             */
-/*   Updated: 2023/08/07 03:32:19 by wruet-su         ###   ########.fr       */
+/*   Updated: 2023/08/10 22:25:23 by wruet-su         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,16 +47,18 @@ void	ft_free_exit(t_cube *cube)
 		mlx_destroy_image(cube->mlx, cube->img->img_ptr);
 	if (cube->mlx_win)
 		mlx_destroy_window(cube->mlx, cube->mlx_win);
+	ft_free_textures(cube);
 	if (cube->mlx)
 		mlx_destroy_display(cube->mlx);
 	if (cube->mlx)
 		free(cube->mlx);
-	ft_free_textures(cube);
 	exit(0);
 }
 
 static void	ft_free_textures(t_cube *cube)
 {
+	int	i;
+
 	if (cube->text_north)
 		free(cube->text_north);
 	if (cube->text_south)
@@ -65,6 +67,9 @@ static void	ft_free_textures(t_cube *cube)
 		free(cube->text_west);
 	if (cube->text_east)
 		free(cube->text_east);
+	i = -1;
+	while (cube->sprites[++i].img_ptr)
+		mlx_destroy_image(cube->mlx, cube->sprites[i].img_ptr);
 }
 
 void	ft_error(char *s1, char *s2, char *s3, t_cube *cube)
@@ -93,5 +98,7 @@ int	ft_atoi_cube(char c)
 		return (c);
 	if (c == 'D')
 		return (CLOSED_DOOR);
+	if (c == 'X')
+		return (ENEMY);
 	return (FAIL);
 }

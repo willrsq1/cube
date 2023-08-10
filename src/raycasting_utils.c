@@ -6,7 +6,7 @@
 /*   By: wruet-su <william.ruetsuquet@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/04 22:57:45 by wruet-su          #+#    #+#             */
-/*   Updated: 2023/08/08 01:49:52 by wruet-su         ###   ########.fr       */
+/*   Updated: 2023/08/10 22:25:29 by wruet-su         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,19 @@ double	ft_distance(double x, double y, double x0, double y0)
 		y *= -1;
 	dist = sqrt(x * x + y * y);
 	return (dist);
+}
+
+void	ft_wall_pixel(t_cube *cube, int x, int y, double colum_size)
+{
+	double			x_wall;
+	double			y_wall;
+	unsigned int	color;
+
+	x_wall = cube->player.x_wall * cube->sprites[cube->id].img_height;
+	y_wall = ((double)colum_size / (double)cube->sprites[cube->id].img_width);
+	y_wall = (y - (WIN_HEIGHT / 2 - (colum_size / 2) + cube->height)) / y_wall;
+	color = get_pixel_img(cube->sprites[cube->id], x_wall, y_wall);
+	ft_pixel(cube->img, x, y, color);
 }
 
 void	ft_pixel(t_img *img, int x, int y, int color)
