@@ -6,11 +6,11 @@
 /*   By: wruet-su <william.ruetsuquet@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/04 12:12:02 by wruet-su          #+#    #+#             */
-/*   Updated: 2023/08/10 23:13:42 by wruet-su         ###   ########.fr       */
+/*   Updated: 2023/08/10 23:13:14 by wruet-su         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cube.h"
+#include "../includes_bonus/cube_bonus.h"
 
 static double	get_dist(t_cube *cube, t_player *player, double x, double y);
 static void		get_exact_coords(double *x, double *y, t_cube *cube);
@@ -79,11 +79,14 @@ static void	ft_texture(t_player *player, double x, double y, t_cube *cube)
 	player->x_wall = fabs((int)x - x);
 	if (abs((int)x) != abs((int)(x - player->vector_x * RESOLUTION)))
 		player->x_wall = fabs((int)y - y);
-	if (fabs((int)x - x) >= fabs((int)y - y))
+	if (cube->map[(int)x][(int)y] == CLOSED_DOOR)
+		cube->id = BRICK;
+	else if (fabs((int)x - x) >= fabs((int)y - y))
 	{
-		cube->id = EAST;
 		if (abs((int)x) != abs((int)(x - player->vector_x * RESOLUTION)))
 			cube->id = NORTH;
+		else
+			cube->id = EAST;
 	}
 	else
 	{
@@ -91,6 +94,10 @@ static void	ft_texture(t_player *player, double x, double y, t_cube *cube)
 		if (abs((int)x) != abs((int)(x - player->vector_x * RESOLUTION)))
 			cube->id = SOUTH;
 	}
+	x -= player->vector_x * RESOLUTION;
+	y -= player->vector_y * RESOLUTION;
+	if (cube->map[(int)(x)][(int)(y)] == OPENED_DOOR)
+		cube->id = DOOR;
 }
 
 static void	draw_wall(double dist, t_cube *cube, int x)
@@ -104,12 +111,12 @@ static void	draw_wall(double dist, t_cube *cube, int x)
 	wall_size = WIN_HEIGHT / dist;
 	half_of_wall_size = wall_size / 2;
 	y = 0;
-	while (y < WIN_HEIGHT / 2 - half_of_wall_size)
+	while (y < WIN_HEIGHT / 2 - half_of_wall_size + cube->height)
 	{
 		ft_pixel(cube->img, x, y, cube->ceiling_color);
 		y++;
 	}
-	while (y <= WIN_HEIGHT / 2 + half_of_wall_size - 1)
+	while (y <= WIN_HEIGHT / 2 + half_of_wall_size + cube->height - 1)
 	{
 		ft_wall_pixel(cube, x, y, wall_size);
 		y++;

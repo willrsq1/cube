@@ -6,11 +6,11 @@
 /*   By: wruet-su <william.ruetsuquet@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 15:31:24 by wruet-su          #+#    #+#             */
-/*   Updated: 2023/08/10 16:50:33 by wruet-su         ###   ########.fr       */
+/*   Updated: 2023/08/10 22:46:00 by wruet-su         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/cube.h"
+#include "../../includes_bonus/cube_bonus.h"
 
 void	cc(int x_start, int y_start, int height, int width, int coef_h, int coef_w, t_img tex, t_img *img)
 {

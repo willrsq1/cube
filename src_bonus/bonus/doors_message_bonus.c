@@ -6,11 +6,11 @@
 /*   By: wruet-su <william.ruetsuquet@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/06 20:25:32 by wruet-su          #+#    #+#             */
-/*   Updated: 2023/08/07 02:59:56 by wruet-su         ###   ########.fr       */
+/*   Updated: 2023/08/10 22:46:00 by wruet-su         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/cube.h"
+#include "../../includes_bonus/cube_bonus.h"
 
 static void	print_p(int x, int y, t_cube *cube, int color);
 static void	print_r(int x, int y, t_cube *cube, int color);

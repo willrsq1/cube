@@ -6,14 +6,12 @@
 /*   By: wruet-su <william.ruetsuquet@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 13:20:38 by wruet-su          #+#    #+#             */
-/*   Updated: 2023/08/10 23:01:16 by wruet-su         ###   ########.fr       */
+/*   Updated: 2023/08/10 22:46:29 by wruet-su         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CUBE_DEFINES_H
-# define CUBE_DEFINES_H
-
-/*	Librairies		*/
+#ifndef CUBE_DEFINES_BONUS_H
+# define CUBE_DEFINES_BONUS_H
 
 # include "get_next_line.h"
 # include <sys/types.h>
@@ -23,17 +21,28 @@
 # include <math.h>
 # include "../mlx_linux/mlx.h"
 
-/*	xpm textures	*/
+# define CLOSED_DOOR 2
+# define OPENED_DOOR -2
+# define ENEMY -3
 
-# define NORTH 0
-# define SOUTH 1
-# define WEST 2
-# define EAST 3
+# define MINNIE 0
+# define CAT1 1
+# define CAT2 2
+# define CAT3 3
+# define CAT4 4
+# define DOOR 5
+# define BRICK 6
+# define NORTH 7
+# define SOUTH 8
+# define WEST 9
+# define EAST 10
 
-/*	Hooks			*/
+# define CD_COLOR 0x98FF98
+# define OP_COLOR 0xADD8E6
 
-# define POSITION_IS_GOOD 0
+# define X 1
 # define CANCEL_THE_MOVEMENT 1
+# define POSITION_IS_GOOD 0
 # define ESC_KEY 65307
 # define UP_ARROW 65362
 # define LEFT_ARROW 65361
@@ -46,26 +55,23 @@
 # define N_KEY 98
 # define B_KEY 110
 # define R_KEY 114
-
-/*	Map				*/
+# define PLUS_KEY 61
+# define MINUS_KEY 45
+# define SPACE_KEY 32
 
 # define END -1
 # define FAIL -3
-# define WALL 1
-# define ENEMY -3
-
-/*	Settings		*/
-
 # define PI2 1.570796000000000081087137004942633211612701416015625
 # define PI  3.141592999999999857863031138549558818340301513671875
 # define PII 6.283184999999999575948095298372209072113037109375
 # define PI3 4.7123889923095703125
 # define FOV 1.17072000
+# define WALL 1
 # define RESOLUTION 0.0001
 # define WIN_WIDTH 1300
 # define WIN_HEIGHT 800
-
-/*	Colors			*/
+# define CEILING_COLOR 0x00FFFF
+# define FLOOR_COLOR 0xFFD700
 
 # define RED 0xFF5050
 # define GREEN 0x00FF00
@@ -117,5 +123,4 @@
 # define ROSEWOOD       0x65000B
 # define TOMATO_RED     0xFF6347
 # define VERMILION      0xE34234
-
 #endif

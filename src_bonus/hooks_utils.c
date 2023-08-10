@@ -6,17 +6,18 @@
 /*   By: wruet-su <william.ruetsuquet@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/03 23:13:23 by wruet-su          #+#    #+#             */
-/*   Updated: 2023/08/10 22:54:58 by wruet-su         ###   ########.fr       */
+/*   Updated: 2023/08/10 22:46:00 by wruet-su         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cube.h"
+#include "../includes_bonus/cube_bonus.h"
 
 static void	ft_move_right(t_cube *cube);
 static void	ft_move_left(t_cube *cube);
 
 void	ft_key_pressed(int key, t_cube *cube)
 {
+	printf("%d\n", key);
 	if (key == ESC_KEY)
 		ft_free_exit(cube);
 	if (key == A_KEY)

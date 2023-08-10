@@ -1,22 +1,39 @@
 
 ### COMPILATION ###
 CC      = cc
-FLAGS  = -Wall -Wextra -Werror
+FLAGS   = -Wall -Wextra -Werror
 
 ### EXECUTABLE ###
-NAME   = cub3D
+NAME = cub3D
 NAME_BONUS = cub3D_bonus
 
 ### INCLUDES ###
-OBJ_PATH  = objs
+OBJ_PATH = objs
 HEADER = includes
-SRC_PATH  = src
-OBJ_PATH_BONUS  = Philosophers_bonus/objs
-HEADER_BONUS = Philosophers_bonus/includes
-SRC_PATH_BONUS  = Philosophers_bonus/src
+SRC_PATH = src
+OBJ_PATH_BONUS = objs_bonus
+HEADER_BONUS = includes_bonus
+SRC_PATH_BONUS = src_bonus
 
 ### SOURCE FILES ###
 SOURCES =     		0_main.c \
+					1_cube.c \
+					2_raycasting.c \
+					3_hooks.c \
+					4_images.c \
+					cube_utils.c \
+					hooks_utils.c \
+					raycasting_utils.c \
+					init/map.c \
+					init/textures.c \
+					init/colors.c \
+					init/map_error.c \
+					init/player_init.c \
+					init/ft_split.c \
+					gnl/get_next_line.c \
+					gnl/get_next_line_utils.c \
+
+SOURCES_BONUS =     0_main.c \
 					1_cube.c \
 					2_raycasting.c \
 					3_hooks.c \
@@ -38,12 +55,6 @@ SOURCES =     		0_main.c \
 					bonus/minimap_bonus.c \
 					bonus/hooks_bonus.c \
 					bonus/enemy.c \
-
-
-SOURCES_BONUS =    	main.c \
-					philo_bonus.c \
-					init_bonus.c \
-					utils_bonus.c \
 
 MLX = mlx_linux
 ### OBJECTS ###

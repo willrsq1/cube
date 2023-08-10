@@ -6,11 +6,11 @@
 /*   By: wruet-su <william.ruetsuquet@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/04 22:57:45 by wruet-su          #+#    #+#             */
-/*   Updated: 2023/08/10 23:03:03 by wruet-su         ###   ########.fr       */
+/*   Updated: 2023/08/10 22:46:00 by wruet-su         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cube.h"
+#include "../includes_bonus/cube_bonus.h"
 
 void	fix_angle(double *angle)
 {
@@ -42,7 +42,7 @@ void	ft_wall_pixel(t_cube *cube, int x, int y, double colum_size)
 
 	x_wall = cube->player.x_wall * cube->sprites[cube->id].img_height;
 	y_wall = ((double)colum_size / (double)cube->sprites[cube->id].img_width);
-	y_wall = (y - (WIN_HEIGHT / 2 - (colum_size / 2))) / y_wall;
+	y_wall = (y - (WIN_HEIGHT / 2 - (colum_size / 2) + cube->height)) / y_wall;
 	color = get_pixel_img(cube->sprites[cube->id], x_wall, y_wall);
 	ft_pixel(cube->img, x, y, color);
 }

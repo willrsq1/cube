@@ -6,11 +6,11 @@
 /*   By: wruet-su <william.ruetsuquet@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/03 18:57:56 by wruet-su          #+#    #+#             */
-/*   Updated: 2023/08/10 23:00:27 by wruet-su         ###   ########.fr       */
+/*   Updated: 2023/08/10 22:46:00 by wruet-su         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cube.h"
+#include "../includes_bonus/cube_bonus.h"
 
 static void	ft_free_textures(t_cube *cube);
 
@@ -23,6 +23,10 @@ int	ft_valid_pos(t_cube *cube, double x, double y)
 		cube->map[(int)x][(int)y] == END || \
 		cube->map[(int)x][(int)y] == WALL)
 		return (WALL);
+	if (cube->map[(int)x][(int)y] == CLOSED_DOOR)
+		return (CLOSED_DOOR);
+	if (cube->map[(int)x][(int)y] == OPENED_DOOR)
+		return (OPENED_DOOR);
 	return (0);
 }
 
@@ -92,5 +96,9 @@ int	ft_atoi_cube(char c)
 		c == 'E' || \
 		c == 'W')
 		return (c);
+	if (c == 'D')
+		return (CLOSED_DOOR);
+	if (c == 'X')
+		return (ENEMY);
 	return (FAIL);
 }

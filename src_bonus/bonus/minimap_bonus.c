@@ -6,11 +6,11 @@
 /*   By: wruet-su <william.ruetsuquet@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/06 17:41:43 by wruet-su          #+#    #+#             */
-/*   Updated: 2023/08/10 17:48:52 by wruet-su         ###   ########.fr       */
+/*   Updated: 2023/08/10 22:46:00 by wruet-su         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/cube.h"
+#include "../../includes_bonus/cube_bonus.h"
 
 static void	ft_draw_square(int size, int y, int x, t_cube *cube);
 

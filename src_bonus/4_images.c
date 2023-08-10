@@ -6,13 +6,13 @@
 /*   By: wruet-su <william.ruetsuquet@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 13:26:24 by wruet-su          #+#    #+#             */
-/*   Updated: 2023/08/10 23:19:24 by wruet-su         ###   ########.fr       */
+/*   Updated: 2023/08/10 22:46:00 by wruet-su         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cube.h"
+#include "../includes_bonus/cube_bonus.h"
 
-int	get_pixel_img(t_img img, int x, int y)
+unsigned int	get_pixel_img(t_img img, int x, int y)
 {
 	unsigned int	pix;
 
@@ -20,7 +20,7 @@ int	get_pixel_img(t_img img, int x, int y)
 		return (0);
 	pix = *(unsigned int *)((img.addr + \
 		(y * img.size_line) + (x * img.bpp / 8)));
-	return ((int)pix);
+	return (pix);
 }
 
 void	put_my_img_to_img(int x_start, int y_start, t_img tex, t_img *img)
@@ -62,4 +62,12 @@ void	get_img(t_cube *cube, t_img *img, char *path)
 		perror(path);
 		ft_free_exit(cube);
 	}
+}
+
+time_t	ft_time(void)
+{
+	struct timeval	tv;
+
+	gettimeofday(&tv, NULL);
+	return ((tv.tv_sec * 1000) + (tv.tv_usec / 1000));
 }

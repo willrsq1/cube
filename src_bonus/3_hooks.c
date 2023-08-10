@@ -6,11 +6,11 @@
 /*   By: wruet-su <william.ruetsuquet@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/03 23:21:29 by wruet-su          #+#    #+#             */
-/*   Updated: 2023/08/10 22:55:55 by wruet-su         ###   ########.fr       */
+/*   Updated: 2023/08/10 22:46:00 by wruet-su         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cube.h"
+#include "../includes_bonus/cube_bonus.h"
 
 int	ft_key_hook(int key, t_cube *cube)
 {
@@ -19,6 +19,7 @@ int	ft_key_hook(int key, t_cube *cube)
 	ft_key_pressed(key, cube);
 	if (ft_check_player_position(cube) == CANCEL_THE_MOVEMENT)
 		return (1);
+	ft_key_hook_bonus(key, cube);
 	ft_update_image(cube);
 	ft_destroy_image(cube);
 	return (1);
@@ -40,6 +41,7 @@ void	ft_update_image(t_cube *cube)
 		ft_free_exit(cube);
 	}
 	ft_raycasting(cube, &cube->player);
+	ft_update_image_bonus(cube);
 }
 
 void	ft_destroy_image(t_cube *cube)

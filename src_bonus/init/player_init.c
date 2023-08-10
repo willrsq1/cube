@@ -6,11 +6,11 @@
 /*   By: wruet-su <william.ruetsuquet@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/03 20:30:09 by wruet-su          #+#    #+#             */
-/*   Updated: 2023/08/10 22:59:31 by wruet-su         ###   ########.fr       */
+/*   Updated: 2023/08/10 22:46:00 by wruet-su         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/cube.h"
+#include "../../includes_bonus/cube_bonus.h"
 
 static void	get_player_direction(t_cube *cube, char c);
 
@@ -53,10 +53,13 @@ void	print_map(int **map, int map_lenght, t_cube *cube)
 		y = 0;
 		while (map[i][y] != END)
 		{
-			if (map[i][y] > 31)
-				letter_number++;
+			if (map[i][y] > 31 && ++letter_number)
+				printf("%c", map[i][y]);
+			else
+				printf("%d", map[i][y]);
 			y++;
 		}
+		printf("\n");
 		i++;
 	}
 	if (letter_number != 1)
