@@ -6,7 +6,7 @@
 /*   By: wruet-su <william.ruetsuquet@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/03 18:57:24 by wruet-su          #+#    #+#             */
-/*   Updated: 2023/08/10 23:02:03 by wruet-su         ###   ########.fr       */
+/*   Updated: 2023/08/10 23:28:25 by wruet-su         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	ft_cube(char **argv)
 {
 	t_cube	cube;
 	t_img	img;
-
+//faut mettre les key hooks demandés dans le sujet
 	ft_init(argv, &cube, &img);
 	launch_mlx(&cube);
 	launch_assets(&cube);
