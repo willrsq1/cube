@@ -6,7 +6,7 @@
 /*   By: wruet-su <william.ruetsuquet@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/06 13:36:13 by wruet-su          #+#    #+#             */
-/*   Updated: 2023/08/10 22:46:00 by wruet-su         ###   ########.fr       */
+/*   Updated: 2023/08/12 07:15:10 by wruet-su         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,8 @@ void	ft_check_map_is_closed(t_cube *cube, int **map)
 		y = 0;
 		while (y < cube->map_width)
 		{
-			if (map[x][y] == 0 || map[x][y] == CLOSED_DOOR)
+			if (map[x][y] == 0 || map[x][y] == CLOSED_DOOR || \
+				map[x][y] <= ENEMY)
 			{
 				if (ft_check_vertically(x, y, map, cube->map_lenght) == 1)
 					ft_error("Map unclosed.", NULL, NULL, cube);

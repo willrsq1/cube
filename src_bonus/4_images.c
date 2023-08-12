@@ -6,13 +6,13 @@
 /*   By: wruet-su <william.ruetsuquet@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 13:26:24 by wruet-su          #+#    #+#             */
-/*   Updated: 2023/08/10 22:46:00 by wruet-su         ###   ########.fr       */
+/*   Updated: 2023/08/12 10:28:15 by wruet-su         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes_bonus/cube_bonus.h"
 
-unsigned int	get_pixel_img(t_img img, int x, int y)
+int	get_pixel_img(t_img img, int x, int y)
 {
 	unsigned int	pix;
 
@@ -36,7 +36,7 @@ void	put_my_img_to_img(int x_start, int y_start, t_img tex, t_img *img)
 		while (y < tex.img_width)
 		{
 			pix = get_pixel_img(tex, y, i);
-			if (pix != 0xFF000000)
+			if (pix != 0xFF000000 && pix != 0xFFFFFF)
 				ft_pixel(img, x_start + y, y_start + i, pix);
 			y++;
 		}

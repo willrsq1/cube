@@ -6,13 +6,13 @@
 /*   By: wruet-su <william.ruetsuquet@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/03 20:30:09 by wruet-su          #+#    #+#             */
-/*   Updated: 2023/08/10 22:46:00 by wruet-su         ###   ########.fr       */
+/*   Updated: 2023/08/12 07:16:08 by wruet-su         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes_bonus/cube_bonus.h"
 
-static void	get_player_direction(t_cube *cube, char c);
+static void	get_player_angle(t_cube *cube, char c);
 
 void	get_player_position(t_cube *cube)
 {
@@ -31,7 +31,8 @@ void	get_player_position(t_cube *cube)
 				cube->player.y = y + 0.5;
 				cube->player.cube = cube;
 				cube->player.texture = NULL;
-				get_player_direction(cube, cube->map[x][y]);
+				get_player_angle(cube, cube->map[x][y]);
+				cube->map[x][y] = 0;
 				return ;
 			}
 			y++;
@@ -54,7 +55,9 @@ void	print_map(int **map, int map_lenght, t_cube *cube)
 		while (map[i][y] != END)
 		{
 			if (map[i][y] > 31 && ++letter_number)
+			{
 				printf("%c", map[i][y]);
+			}
 			else
 				printf("%d", map[i][y]);
 			y++;
@@ -66,15 +69,15 @@ void	print_map(int **map, int map_lenght, t_cube *cube)
 		ft_error("Error with starting position", NULL, NULL, cube);
 }
 
-static void	get_player_direction(t_cube *cube, char c)
+static void	get_player_angle(t_cube *cube, char c)
 {
 	cube->player.fov = FOV;
 	if (c == 'N')
-		cube->player.direction = PI;
+		cube->player.angle = PI;
 	if (c == 'S')
-		cube->player.direction = 0;
+		cube->player.angle = 0;
 	if (c == 'E')
-		cube->player.direction = PI2;
+		cube->player.angle = PI2;
 	if (c == 'W')
-		cube->player.direction = PI3;
+		cube->player.angle = PI3;
 }

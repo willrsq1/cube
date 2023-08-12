@@ -6,7 +6,7 @@
 /*   By: wruet-su <william.ruetsuquet@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 12:32:36 by marvin            #+#    #+#             */
-/*   Updated: 2023/08/10 22:46:00 by wruet-su         ###   ########.fr       */
+/*   Updated: 2023/08/12 07:16:08 by wruet-su         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,9 @@ void	draw_pov_player(t_cube *cube, t_player *player, int color, int coef)
 	double	angle;
 	int		pixel_column;
 
-	fix_angle(&player->direction);
+	fix_angle(&player->angle);
 	pixel_column = 0;
-	angle = player->direction + player->fov / 2;
+	angle = player->angle + player->fov / 2;
 	plot.x0 = player->x * coef;
 	plot.y0 = player->y * coef;
 	while (pixel_column <= WIN_WIDTH)

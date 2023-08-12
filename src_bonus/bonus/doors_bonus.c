@@ -6,7 +6,7 @@
 /*   By: wruet-su <william.ruetsuquet@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/06 11:43:57 by wruet-su          #+#    #+#             */
-/*   Updated: 2023/08/10 22:46:00 by wruet-su         ###   ########.fr       */
+/*   Updated: 2023/08/12 07:16:08 by wruet-su         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@ void	ft_doors(int key, t_cube *cube)
 		cube->door_message = 1;
 		if (key == 120)
 		{
-			cube->map[(int)(cube->player.x + cos(cube->player.direction) \
-				* i)][(int)(cube->player.y + sin(cube->player.direction) \
+			cube->map[(int)(cube->player.x + cos(cube->player.angle) \
+				* i)][(int)(cube->player.y + sin(cube->player.angle) \
 				* i)] = OPENED_DOOR;
 			return ;
 		}
@@ -37,8 +37,8 @@ void	ft_doors(int key, t_cube *cube)
 	{
 		cube->door_message = 1;
 		if (key == 120)
-			cube->map[(int)(cube->player.x + cos(cube->player.direction) \
-				* i)][(int)(cube->player.y + sin(cube->player.direction) \
+			cube->map[(int)(cube->player.x + cos(cube->player.angle) \
+				* i)][(int)(cube->player.y + sin(cube->player.angle) \
 				* i)] = CLOSED_DOOR;
 	}
 }
@@ -50,8 +50,8 @@ static double	ft_check_for_closed_door(t_cube *cube)
 	i = 0.01;
 	while (i < 2)
 	{
-		if (ft_valid_pos(cube, cube->player.x + cos(cube->player.direction) \
-			* i, cube->player.y + sin(cube->player.direction) \
+		if (ft_valid_pos_bonus(cube, cube->player.x + cos(cube->player.angle) \
+			* i, cube->player.y + sin(cube->player.angle) \
 			* i) == CLOSED_DOOR)
 			return (i);
 		i += 0.01;
@@ -68,8 +68,8 @@ static double	ft_check_for_opened_door(t_cube *cube)
 		return (0);
 	while (i < 2)
 	{
-		if (ft_valid_pos(cube, cube->player.x + cos(cube->player.direction) \
-			* i, cube->player.y + sin(cube->player.direction) \
+		if (ft_valid_pos_bonus(cube, cube->player.x + cos(cube->player.angle) \
+			* i, cube->player.y + sin(cube->player.angle) \
 			* i) == OPENED_DOOR)
 			return (i);
 		i += 0.01;

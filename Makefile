@@ -49,12 +49,16 @@ SOURCES_BONUS =     0_main.c \
 					init/ft_split.c \
 					gnl/get_next_line.c \
 					gnl/get_next_line_utils.c \
+					bonus/attack_hooks.c \
 					bonus/doors_bonus.c \
 					bonus/doors_message_bonus.c \
 					bonus/drawing_functs_bonus.c \
 					bonus/minimap_bonus.c \
 					bonus/hooks_bonus.c \
 					bonus/enemy.c \
+					bonus/enemy_back.c \
+					bonus/enemy_utils.c \
+					bonus/update_img_loop.c \
 
 MLX = mlx_linux
 ### OBJECTS ###
@@ -116,7 +120,7 @@ $(OBJ_PATH_BONUS)/%.o: $(SRC_PATH_BONUS)/%.c $(HEADER_BONUS)/*.h
 	@echo "$(BLUE)Creating object file -> $(WHITE)$(notdir $@)... $(RED)[Done]$(NOC)"
 
 norminette:
-	@norminette src/ includes/
+	@norminette src/ includes/ src_bonus/ includes_bonus/
 
 mlx:
 	@make --no-print-directory -C ${MLX}
@@ -124,6 +128,6 @@ mlx:
 re: fclean
 	@$(MAKE) all
 
-# leaks: ${NAME} all
-# 	valgrind --leak-check=full --show-leak-kinds=all --track-fds=yes -s ./cub3D maps/arbesa.cub
+leaks: ${NAME_BONUS}
+	valgrind --leak-check=full --show-leak-kinds=all --track-fds=yes -s ./cub3D_bonus maps/map_door.cub
 .PHONY: re fclean clean norminette bonus mlx all

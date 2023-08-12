@@ -6,7 +6,7 @@
 /*   By: wruet-su <william.ruetsuquet@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/03 18:57:56 by wruet-su          #+#    #+#             */
-/*   Updated: 2023/08/10 22:46:00 by wruet-su         ###   ########.fr       */
+/*   Updated: 2023/08/12 18:40:07 by wruet-su         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static void	ft_free_textures(t_cube *cube);
 
-int	ft_valid_pos(t_cube *cube, double x, double y)
+int	ft_valid_pos_bonus(t_cube *cube, double x, double y)
 {
 	if (x < 0 || \
 		y < 0 || \
@@ -27,6 +27,10 @@ int	ft_valid_pos(t_cube *cube, double x, double y)
 		return (CLOSED_DOOR);
 	if (cube->map[(int)x][(int)y] == OPENED_DOOR)
 		return (OPENED_DOOR);
+	if (cube->map[(int)x][(int)y] <= ENEMY && cube->animation)
+	{
+		cube->enemy = 1;
+	}
 	return (0);
 }
 
@@ -85,20 +89,31 @@ void	ft_error(char *s1, char *s2, char *s3, t_cube *cube)
 	ft_free_exit(cube);
 }
 
-int	ft_atoi_cube(char c)
+bool	ft_check_player_position(t_cube *cube)
 {
-	if (c == ' ')
-		return (1);
-	if (c == '0' || c == '1')
-		return (c - 48);
-	if (c == 'N' || \
-		c == 'S' || \
-		c == 'E' || \
-		c == 'W')
-		return (c);
-	if (c == 'D')
-		return (CLOSED_DOOR);
-	if (c == 'X')
-		return (ENEMY);
-	return (FAIL);
+	cube->enemy = 0;
+	if (ft_valid_pos_bonus(cube, cube->player.x, cube->player.y) > 0)
+	{
+		if (ft_valid_pos_bonus(cube, cube->player.prev_x, cube->player.y) <= 0)
+			cube->player.x = cube->player.prev_x;
+		else if (ft_valid_pos_bonus(cube, \
+			cube->player.x, cube->player.prev_y) <= 0)
+			cube->player.y = cube->player.prev_y;
+		else
+		{
+			cube->player.x = cube->player.prev_x;
+			cube->player.y = cube->player.prev_y;
+			return (CANCEL_THE_MOVEMENT);
+		}
+	}
+	if (cube->enemy)
+	{
+		if (ft_valid_pos_enemy(cube, cube->player.x, cube->player.y) <= ENEMY)
+		{
+			cube->player.x = cube->player.prev_x;
+			cube->player.y = cube->player.prev_y;
+			return (CANCEL_THE_MOVEMENT);
+		}
+	}
+	return (POSITION_IS_GOOD);
 }

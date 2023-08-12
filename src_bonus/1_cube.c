@@ -6,7 +6,7 @@
 /*   By: wruet-su <william.ruetsuquet@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/03 18:57:24 by wruet-su          #+#    #+#             */
-/*   Updated: 2023/08/10 22:46:00 by wruet-su         ###   ########.fr       */
+/*   Updated: 2023/08/12 18:23:54 by wruet-su         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ static void	ft_init(char **argv, t_cube *cube, t_img *img)
 	cube->floor_color = -1;
 	cube->minimap = 1;
 	cube->mouse_drag = 1;
+	cube->weapon = SWORD;
 	cube->map = ft_map(argv[1], cube);
 	print_map(cube->map, cube->map_lenght, cube);
 	ft_check_map_is_closed(cube, cube->map);
@@ -88,19 +89,26 @@ static void	launch_assets(t_cube *cube)
 	get_img(cube, &cube->sprites[SOUTH], cube->text_south);
 	get_img(cube, &cube->sprites[WEST], cube->text_west);
 	get_img(cube, &cube->sprites[EAST], cube->text_east);
+	get_img(cube, &cube->sprites[CAT0], "assets/cat/cat_5.xpm");
+	get_img(cube, &cube->sprites[CAT_HURT], "assets/cat/cat_6.xpm");
+	get_img(cube, &cube->sprites[CAT_DEAD], "assets/cat/cat_7.xpm");
+	get_img(cube, &cube->sprites[SWORD], "assets/cat/sword.xpm");
+	get_img(cube, &cube->sprites[SWORD2], "assets/cat/sword2.xpm");
+	get_img(cube, &cube->sprites[GUN], "assets/cat/gun.xpm");
+	get_img(cube, &cube->sprites[GUN2], "assets/cat/gun2.xpm");
+	get_img(cube, &cube->sprites[LANDING], "assets/cat/landing.xpm");
+	get_img(cube, &cube->sprites[PAUSE_LEFT], "assets/cat/pause_left.xpm");
+	get_img(cube, &cube->sprites[PAUSE_RIGHT], "assets/cat/pause_right.xpm");
+	get_img(cube, &cube->sprites[LOST], "assets/cat/lost.xpm");
 }
 
 static void	launch_window(t_cube *cube)
 {
-	ft_raycasting(cube, &cube->player);
-	if (cube->door_message)
-		print_door_message(cube);
-	if (cube->minimap)
-		ft_minimap(cube);
+	put_my_img_to_img(0, 0, cube->sprites[LANDING], cube->img);
 	mlx_hook(cube->mlx_win, 2, 1L << 0, ft_key_hook, cube);
 	mlx_hook(cube->mlx_win, 17, 1L << 17, ft_close, cube);
 	ft_hooks_bonus(cube);
-	mlx_loop_hook(cube->mlx, truc, cube);
+	mlx_loop_hook(cube->mlx, update_loop, cube);
 	mlx_put_image_to_window(cube->mlx, cube->mlx_win, cube->img->img_ptr, 0, 0);
 	mlx_destroy_image(cube->mlx, cube->img->img_ptr);
 	cube->img->img_ptr = NULL;

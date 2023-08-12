@@ -6,64 +6,75 @@
 /*   By: wruet-su <william.ruetsuquet@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 15:31:24 by wruet-su          #+#    #+#             */
-/*   Updated: 2023/08/10 22:46:00 by wruet-su         ###   ########.fr       */
+/*   Updated: 2023/08/12 07:28:36 by wruet-su         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes_bonus/cube_bonus.h"
 
-void	cc(int x_start, int y_start, int height, int width, int coef_h, int coef_w, t_img tex, t_img *img)
-{
-	int				i;
-	int				y;
-	unsigned int	pix;
+static double	get_dist_enemy(t_cube *cube, t_player *player, \
+	double x, double y);
+static void		get_exact_coords_enemy(double *x, double *y, t_cube *cube);
 
-	i = 0;
-	while (i < height)
+void	draw_enemy(t_cube *cube, t_player *player, double angle, int x)
+{
+	double	distance;
+
+	cube->fd = x;
+	cube->angle = angle;
+	player->vector_x = cos(angle) * 0.01;
+	player->vector_y = sin(angle) * 0.01;
+	draw_enemy_back(cube, player, angle, x);
+	distance = get_dist_enemy(cube, player, player->x, player->y);
+	if (distance == -1)
+		return ;
+	distance *= cos(player->angle - angle) * player->fov;
+	draw_column_enemy(distance, cube, x);
+	cube->fd = -1;
+}
+
+static double	get_dist_enemy(t_cube *cube, t_player *player, \
+	double x, double y)
+{
+	double	distance;
+	int		return_value;
+
+	while (1)
 	{
-		y = 0;
-		while (y < width)
-		{
-			pix = get_pixel_img(tex, y / coef_h, i / coef_w);
-			if (pix != 0xFFFFFF && pix != 0x000000)
-				ft_pixel(img, x_start + y, y_start + i, pix);
-			y++;
-		}
-		i++;
+		return_value = ft_valid_pos_enemy(cube, x, y);
+		if (return_value == END)
+			return (-1);
+		if (return_value <= ENEMY)
+			break ;
+		x += player->vector_x;
+		y += player->vector_y;
 	}
+	get_exact_coords_enemy(&x, &y, cube);
+	cube->id = cube->map[(int)x][(int)y];
+	player->x_wall = fabs((int)x - x);
+	if (abs((int)x) != abs((int)(x - player->vector_x * RESOLUTION)))
+		player->x_wall = fabs((int)y - y);
+	distance = ft_distance(x, y, player->x, player->y);
+	return (distance);
 }
 
-int	truc(t_cube *cube)
+static void	get_exact_coords_enemy(double *x, double *y, t_cube *cube)
 {
-	time_t	time;
-
-	time = (ft_time() - cube->start) % 1000;
-	if (time > 750)
-		cube->id = CAT4;
-	if (time > 500)
-		cube->id = CAT3;
-	if (time > 250)
-		cube->id = CAT2;
-	else
-		cube->id = CAT1;
-	usleep(100000);
-	ft_update_image(cube);
-	// cc(300, 300, 500, 500, 500 / cube->sprites[CAT1].img_height, 500 / cube->sprites[CAT1].img_width, cube->sprites[CAT1], cube->img);
-	ft_destroy_image(cube);
-	// usleep(100000);
-	// // ft_update_image(cube);
-	// cc(300, 300, 500, 500, 500 / cube->sprites[CAT2].img_height, 500 / cube->sprites[CAT2].img_width, cube->sprites[CAT2], cube->img);
-	// ft_destroy_image(cube);
-	// usleep(100000);
-	// // ft_update_image(cube);
-	// cc(300, 300, 500, 500, 500 / cube->sprites[CAT3].img_height, 500 / cube->sprites[CAT3].img_width, cube->sprites[CAT3], cube->img);
-	// ft_destroy_image(cube);
-	// usleep(100000);
-	// // ft_update_image(cube);
-	// cc(300, 300, 500, 500, 500 / cube->sprites[CAT4].img_height, 500 / cube->sprites[CAT4].img_width, cube->sprites[CAT4], cube->img);
-	// ft_destroy_image(cube);
-	// usleep(100000);
-	
-	return (1);
+	while (ft_valid_pos_enemy(cube, *x, *y) <= ENEMY)
+	{
+		*x -= cube->player.vector_x * (RESOLUTION * 100);
+		*y -= cube->player.vector_y * (RESOLUTION * 100);
+	}
+	while (ft_valid_pos_enemy(cube, *x, *y) > ENEMY)
+	{
+		*x += cube->player.vector_x * (RESOLUTION * 10);
+		*y += cube->player.vector_y * (RESOLUTION * 10);
+	}
+	while (ft_valid_pos_enemy(cube, *x, *y) <= ENEMY)
+	{
+		*x -= cube->player.vector_x * RESOLUTION;
+		*y -= cube->player.vector_y * RESOLUTION;
+	}
+	*x += cube->player.vector_x * RESOLUTION;
+	*y += cube->player.vector_y * RESOLUTION;
 }
-

@@ -6,12 +6,13 @@
 /*   By: wruet-su <william.ruetsuquet@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/06 17:41:43 by wruet-su          #+#    #+#             */
-/*   Updated: 2023/08/10 22:46:00 by wruet-su         ###   ########.fr       */
+/*   Updated: 2023/08/12 07:32:19 by wruet-su         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes_bonus/cube_bonus.h"
 
+static void	ft_draw_enemies(t_cube *cube, double coef, int x, int y);
 static void	ft_draw_square(int size, int y, int x, t_cube *cube);
 
 void	ft_minimap(t_cube *cube)
@@ -30,12 +31,35 @@ void	ft_minimap(t_cube *cube)
 		while (cube->map[y][x] != END)
 		{
 			ft_draw_square(coef, y, x, cube);
+			if (cube->map[y][x] == ENEMY && cube->minimap && cube->animation)
+				put_my_img_to_img((x - 1) * coef, (y - 1) * \
+				coef, cube->sprites[CAT1], cube->img);
 			x++;
 		}
 		y++;
 	}
 	draw_pov_player(cube, &cube->player, RED, coef);
-	put_my_img_to_img((cube->player.y - 1) * coef, (cube->player.x - 1.5) * coef, cube->sprites[MINNIE], cube->img);
+	put_my_img_to_img((cube->player.y - 1) * coef, \
+		(cube->player.x - 1.5) * coef, cube->sprites[MINNIE], cube->img);
+	ft_draw_enemies(cube, coef, 0, 0);
+}
+
+static void	ft_draw_enemies(t_cube *cube, double coef, int x, int y)
+{
+	y = 0;
+	while (y < cube->map_lenght)
+	{
+		x = 0;
+		while (cube->map[y][x] != END)
+		{
+			if ((cube->map[y][x] == ENEMY) \
+				&& cube->minimap && cube->animation)
+				put_my_img_to_img((x - 1) * coef, (y - 1) * coef, \
+				cube->sprites[CAT1], cube->img);
+			x++;
+		}
+		y++;
+	}
 }
 
 static void	ft_draw_square(int size, int y, int x, t_cube *cube)
@@ -65,4 +89,28 @@ static void	ft_draw_square(int size, int y, int x, t_cube *cube)
 			i++;
 		}
 	}
+}
+
+void	ft_jump(t_cube *cube)
+{
+	size_t	i;
+	int		height;
+
+	height = cube->height;
+	i = 135;
+	while (i > 110)
+	{
+		if (i > 120)
+			cube->height += i / 15 + 15;
+		else
+			cube->height += i % 110;
+		ft_update_image(cube);
+		i--;
+	}
+	while (cube->height > height)
+	{
+		cube->height -= 15;
+		ft_update_image(cube);
+	}
+	cube->height = height;
 }

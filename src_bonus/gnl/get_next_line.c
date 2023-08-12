@@ -6,11 +6,11 @@
 /*   By: wruet-su <william.ruetsuquet@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 12:02:18 by wruet-su          #+#    #+#             */
-/*   Updated: 2023/08/07 03:28:08 by wruet-su         ###   ########.fr       */
+/*   Updated: 2023/08/11 10:05:24 by wruet-su         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/get_next_line.h"
+#include "../../includes_bonus/get_next_line.h"
 
 /* If there is one, this function will return the position 
  * of the start of the newline + 1, to ensure that the

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cube_defines.h                                     :+:      :+:    :+:   */
+/*   cube_defines_bonus.h                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wruet-su <william.ruetsuquet@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 13:20:38 by wruet-su          #+#    #+#             */
-/*   Updated: 2023/08/10 22:46:29 by wruet-su         ###   ########.fr       */
+/*   Updated: 2023/08/12 18:34:56 by wruet-su         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,19 @@
 # include <fcntl.h>
 # include <math.h>
 # include "../mlx_linux/mlx.h"
+# include <sys/time.h>
 
 # define CLOSED_DOOR 2
+# define END -1
 # define OPENED_DOOR -2
 # define ENEMY -3
+# define HURT_ENEMY -4
+# define DEAD_ENEMY -5
+# define NEW_ENEMY -6
+
+# define SPAWN_TIME 5000
+# define ATTACK_RANGE_SWORD 2
+# define ATTACK_RANGE_GUN 6
 
 # define MINNIE 0
 # define CAT1 1
@@ -36,6 +45,18 @@
 # define SOUTH 8
 # define WEST 9
 # define EAST 10
+# define CAT0 11
+# define CAT_HURT 12
+# define CAT_DEAD 13
+# define SWORD 14
+# define SWORD2 15
+# define GUN 16
+# define GUN2 17
+# define LANDING 18
+# define PAUSE_LEFT 19
+# define PAUSE_RIGHT 20
+# define LOST 21
+# define SPRITES_MAX_NB 30
 
 # define CD_COLOR 0x98FF98
 # define OP_COLOR 0xADD8E6
@@ -48,10 +69,13 @@
 # define LEFT_ARROW 65361
 # define DOWN_ARROW 65364
 # define RIGHT_ARROW 65363
+# define ENTER_KEY 65293
 # define A_KEY 97
 # define Z_KEY 122
 # define M_KEY 109
 # define P_KEY 112
+# define U_KEY 117
+# define J_KEY 106
 # define N_KEY 98
 # define B_KEY 110
 # define R_KEY 114
@@ -59,8 +83,6 @@
 # define MINUS_KEY 45
 # define SPACE_KEY 32
 
-# define END -1
-# define FAIL -3
 # define PI2 1.570796000000000081087137004942633211612701416015625
 # define PI  3.141592999999999857863031138549558818340301513671875
 # define PII 6.283184999999999575948095298372209072113037109375

@@ -8,6 +8,7 @@
 		"initializer_list": "c",
 		"utility": "c",
 		"cube_defines.h": "c",
-		"iterator": "c"
+		"iterator": "c",
+		"cube_bonus.h": "c"
 	}
 }
