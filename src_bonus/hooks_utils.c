@@ -6,7 +6,7 @@
 /*   By: wruet-su <william.ruetsuquet@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/03 23:13:23 by wruet-su          #+#    #+#             */
-/*   Updated: 2023/08/12 18:40:56 by wruet-su         ###   ########.fr       */
+/*   Updated: 2023/08/12 18:41:39 by wruet-su         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	ft_key_pressed(int key, t_cube *cube)
 		ft_move_right(cube);
 	if (key == LEFT_ARROW)
 		ft_move_left(cube);
-	if (key == P_KEY)
+	if (key == P_KEY && cube->landing)
 		cube->animation = (cube->animation + 1) % 2;
 	ft_key_enemy(key, cube);
 }
