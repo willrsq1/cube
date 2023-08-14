@@ -33,32 +33,35 @@ SOURCES =     		0_main.c \
 					gnl/get_next_line.c \
 					gnl/get_next_line_utils.c \
 
-SOURCES_BONUS =     0_main.c \
-					1_cube.c \
-					2_raycasting.c \
-					3_hooks.c \
-					4_images.c \
-					cube_utils.c \
-					hooks_utils.c \
-					raycasting_utils.c \
-					init/map.c \
-					init/textures.c \
-					init/colors.c \
-					init/map_error.c \
-					init/player_init.c \
-					init/ft_split.c \
-					gnl/get_next_line.c \
-					gnl/get_next_line_utils.c \
-					bonus/attack_hooks.c \
+SOURCES_BONUS =     0_main_bonus.c \
+					1_cube_bonus.c \
+					2_raycasting_bonus.c \
+					3_hooks_bonus.c \
+					4_images_bonus.c \
+					cube_utils_bonus.c \
+					hooks_interface_bonus.c \
+					hooks_utils_bonus.c \
+					raycasting_utils_bonus.c \
+					z_levels_bonus.c \
+					init_bonus/map_bonus.c \
+					init_bonus/textures_bonus.c \
+					init_bonus/colors_bonus.c \
+					init_bonus/map_error_bonus.c \
+					init_bonus/player_init_bonus.c \
+					init_bonus/ft_split_bonus.c \
+					gnl_bonus/get_next_line_bonus.c \
+					gnl_bonus/get_next_line_utils_bonus.c \
+					bonus/attack_hooks_bonus.c \
 					bonus/doors_bonus.c \
 					bonus/doors_message_bonus.c \
 					bonus/drawing_functs_bonus.c \
 					bonus/minimap_bonus.c \
 					bonus/hooks_bonus.c \
-					bonus/enemy.c \
-					bonus/enemy_back.c \
-					bonus/enemy_utils.c \
-					bonus/update_img_loop.c \
+					bonus/enemy_bonus.c \
+					bonus/enemy_back_bonus.c \
+					bonus/enemy_utils_bonus.c \
+					bonus/update_img_loop_bonus.c \
+					bonus/pollution_bonus.c \
 
 MLX = mlx_linux
 ### OBJECTS ###
@@ -96,18 +99,6 @@ $(OBJ_PATH)/%.o: $(SRC_PATH)/%.c $(HEADER)/*.h
 	@$(CC) $(FLAGS) -c -o $@ $<
 	@echo "$(BLUE)Creating object file -> $(WHITE)$(notdir $@)... $(RED)[Done]$(NOC)"
 
-clean:
-	@echo "$(GREEN)Supressing libraries files$(CYAN)"
-	@rm -f $(OBJ_PATH)/*.o
-	@rm -f $(OBJ_PATH_BONUS)/*.o
-
-fclean:
-	@echo "$(GREEN)Supressing libraries files$(CYAN)"
-	@rm -rf $(OBJ_PATH)
-	@rm -rf $(OBJ_PATH_BONUS)
-	@rm -f $(NAME)
-	@rm -f $(NAME_BONUS)
-
 bonus: $(NAME_BONUS)
 	
 $(NAME_BONUS): $(OBJS_BONUS)
@@ -128,6 +119,16 @@ mlx:
 re: fclean
 	@$(MAKE) all
 
-leaks: ${NAME_BONUS}
-	valgrind --leak-check=full --show-leak-kinds=all --track-fds=yes -s ./cub3D_bonus maps/map_door.cub
+clean:
+	@echo "$(GREEN)Supressing libraries files$(CYAN)"
+	@rm -f $(OBJ_PATH)/*.o
+	@rm -f $(OBJ_PATH_BONUS)/*.o
+
+fclean:
+	@echo "$(GREEN)Supressing libraries files$(CYAN)"
+	@rm -rf $(OBJ_PATH)
+	@rm -rf $(OBJ_PATH_BONUS)
+	@rm -f $(NAME)
+	@rm -f $(NAME_BONUS)
+
 .PHONY: re fclean clean norminette bonus mlx all

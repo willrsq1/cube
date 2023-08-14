@@ -6,7 +6,7 @@
 /*   By: wruet-su <william.ruetsuquet@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 03:03:59 by wruet-su          #+#    #+#             */
-/*   Updated: 2023/08/12 11:21:59 by wruet-su         ###   ########.fr       */
+/*   Updated: 2023/08/14 07:39:22 by wruet-su         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,33 +18,31 @@ void	ft_hooks_bonus(t_cube *cube)
 	mlx_mouse_hook(cube->mlx_win, handle_mouse_click, cube);
 }
 
-void	ft_update_image_bonus(t_cube *cube)
+void	minimap_weapons_door_message(t_cube *cube)
 {
 	if (cube->door_message)
 		print_door_message(cube);
 	if (cube->minimap)
 		ft_minimap(cube);
-	if (cube->animation)
+	if (cube->weapon == SWORD)
 	{
-		if (cube->weapon == SWORD)
-		{
-			if (!cube->attacking)
-				put_my_img_to_img(WIN_WIDTH * 0.6, WIN_HEIGHT - 250, \
-					cube->sprites[SWORD], cube->img);
-			else
-				put_my_img_to_img(WIN_WIDTH * 0.4, WIN_HEIGHT - 350, \
-					cube->sprites[SWORD2], cube->img);
-		}
-		else if (cube->weapon == GUN)
-		{
-			if (!cube->attacking)
-				put_my_img_to_img(WIN_WIDTH * 0.2, WIN_HEIGHT - 250, \
-					cube->sprites[GUN], cube->img);
-			else
-				put_my_img_to_img(WIN_WIDTH * 0.4, WIN_HEIGHT - 350, \
-					cube->sprites[GUN2], cube->img);
-		}
+		if (!cube->attacking)
+			put_my_img_to_img(WIN_WIDTH * 0.6, WIN_HEIGHT - 250, \
+				cube->sprites[SWORD], cube->img);
+		else
+			put_my_img_to_img(WIN_WIDTH * 0.4, WIN_HEIGHT - 350, \
+				cube->sprites[SWORD2], cube->img);
 	}
+	else if (cube->weapon == GUN)
+	{
+		if (!cube->attacking)
+			put_my_img_to_img(WIN_WIDTH * 0.2, WIN_HEIGHT - 250, \
+				cube->sprites[GUN], cube->img);
+		else
+			put_my_img_to_img(WIN_WIDTH * 0.4, WIN_HEIGHT - 350, \
+				cube->sprites[GUN2], cube->img);
+	}
+	cube->attacking = 0;
 }
 
 void	ft_key_hook_bonus(int key, t_cube *cube)
@@ -64,8 +62,12 @@ void	ft_key_hook_bonus(int key, t_cube *cube)
 	if (key == N_KEY && cube->height > -WIN_HEIGHT)
 		cube->height -= 10;
 	if (key == R_KEY)
+	{
 		cube->height = 1;
-	ft_doors(key, cube);
+		cube->player.fov = FOV;
+	}
+	if (key == P_KEY && cube->welcome_window)
+		cube->animation = (cube->animation + 1) % 2;
 }
 
 int	handle_mouse_move(int x, int y, t_cube *cube)
@@ -89,14 +91,20 @@ int	handle_mouse_click(int key, int x, int y, t_cube *cube)
 {
 	cube->mouse_x = x;
 	cube->mouse_y = y;
-	if (cube->escape)
+	if (cube->win)
+		ft_levels(cube);
+	if (cube->lost)
+		ft_free_exit(cube);
+	if (cube->help_menu)
+		cube->help_menu = 0;
+	if (cube->escape && key)
 	{
 		ft_create_image(cube);
 		if (x < 520 && x > 250 && y < 550 && y > 410)
 		{
 			cube->escape = 0;
 			cube->start = ft_time();
-			if (!cube->landing)
+			if (!cube->welcome_window)
 			{
 				put_my_img_to_img(0, 0, cube->sprites[LANDING], cube->img);
 				ft_destroy_image(cube);
@@ -105,7 +113,5 @@ int	handle_mouse_click(int key, int x, int y, t_cube *cube)
 		if (x < 880 && x > 630 && y < 530 && y > 420)
 			ft_free_exit(cube);
 	}
-	if (key)
-		return (1);
 	return (1);
 }
