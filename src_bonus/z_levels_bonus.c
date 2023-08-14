@@ -6,7 +6,7 @@
 /*   By: wruet-su <william.ruetsuquet@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/13 09:16:05 by wruet-su          #+#    #+#             */
-/*   Updated: 2023/08/14 14:21:15 by wruet-su         ###   ########.fr       */
+/*   Updated: 2023/08/14 14:36:37 by wruet-su         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ void	ft_levels(t_cube *cube)
 
 	if (cube->level == LEVEL_1)
 		s[1] = "maps/level_2.cub";
-	if ((cube->difficulty == EASY && cube->level == LEVEL_1) || \
+	if ((cube->difficulty == EASY && cube->level == LEVEL_2) || \
 		(cube->difficulty == HARD && cube->level == LEVEL_4))
 	{
 		cube->win = 1;
