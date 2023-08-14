@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cube_utils.c                                       :+:      :+:    :+:   */
+/*   cube_utils_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wruet-su <william.ruetsuquet@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/03 18:57:56 by wruet-su          #+#    #+#             */
-/*   Updated: 2023/08/14 00:09:15 by wruet-su         ###   ########.fr       */
+/*   Updated: 2023/08/14 20:29:24 by wruet-su         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,9 +69,13 @@ static void	ft_free_textures(t_cube *cube)
 		free(cube->text_west);
 	if (cube->text_east)
 		free(cube->text_east);
-	i = -1;
-	while (cube->sprites[++i].img_ptr)
-		mlx_destroy_image(cube->mlx, cube->sprites[i].img_ptr);
+	i = 0;
+	while (i < SPRITES_MAX_NB)
+	{
+		if (cube->sprites[i].img_ptr)
+			mlx_destroy_image(cube->mlx, cube->sprites[i].img_ptr);
+		i++;
+	}
 }
 
 void	ft_free(t_cube *cube)

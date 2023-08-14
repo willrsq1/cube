@@ -6,7 +6,7 @@
 /*   By: wruet-su <william.ruetsuquet@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 22:30:10 by wruet-su          #+#    #+#             */
-/*   Updated: 2023/08/14 14:38:09 by wruet-su         ###   ########.fr       */
+/*   Updated: 2023/08/14 20:26:02 by wruet-su         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static void	pause_screen_image(int key, t_cube *cube);
 void	ft_keys_interface(int key, t_cube *cube)
 {
 	if (!cube->welcome_window && key == ENTER_KEY && !cube->escape \
-		&& !cube->help_menu)
+		&& !cube->help_menu && !cube->game_was_won)
 	{
 		if (cube->level == 0 && !cube->difficulty_window)
 		{
@@ -45,7 +45,7 @@ void	ft_keys_interface(int key, t_cube *cube)
 		help_menu_function(key, cube);
 	else if (cube->win && key != SPACE_KEY)
 		ft_levels(cube);
-	else if (cube->game_was_won && (key == ENTER_KEY))
+	else if (cube->game_was_won && key == ENTER_KEY)
 		ft_free_exit(cube);
 }
 
