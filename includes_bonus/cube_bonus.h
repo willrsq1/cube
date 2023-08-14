@@ -6,7 +6,7 @@
 /*   By: wruet-su <william.ruetsuquet@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/03 18:57:50 by wruet-su          #+#    #+#             */
-/*   Updated: 2023/08/14 07:36:50 by wruet-su         ###   ########.fr       */
+/*   Updated: 2023/08/14 13:20:11 by wruet-su         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,7 @@ typedef struct s_cube
 	bool		enemy;
 	bool		attacking;
 	bool		welcome_window;
+	bool		difficulty_window;
 	bool		help_menu;
 	bool		lost;
 	bool		win;
@@ -83,12 +84,13 @@ typedef struct s_cube
 	int			escape;
 	int			weapon;
 	double		angle;
-	int			lvl;
+	int			level;
+	int			difficulty;
 }	t_cube;
 
 /*	1_cube.c			*/
 
-void	ft_cube(char **argv, int level);
+void	ft_cube(char **argv, int level, int difficulty);
 
 /*	2_raycasting.c		*/
 
@@ -232,5 +234,8 @@ void	help_menu_function(int key, t_cube *cube);
 void	ft_free(t_cube *cube);
 void	ft_levels(t_cube *cube);
 void	ft_keys_interface(int key, t_cube *cube);
+void	launch_assets(t_cube *cube);
+void	ft_landing_image(t_cube *cube);
+void	ft_difficulty(int key, t_cube *cube);
 
 #endif

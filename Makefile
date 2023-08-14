@@ -38,6 +38,7 @@ SOURCES_BONUS =     0_main_bonus.c \
 					2_raycasting_bonus.c \
 					3_hooks_bonus.c \
 					4_images_bonus.c \
+					assets_launch_bonus.c \
 					cube_utils_bonus.c \
 					hooks_interface_bonus.c \
 					hooks_utils_bonus.c \

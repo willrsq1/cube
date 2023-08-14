@@ -6,7 +6,7 @@
 /*   By: wruet-su <william.ruetsuquet@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/03 18:57:24 by wruet-su          #+#    #+#             */
-/*   Updated: 2023/08/14 08:37:16 by wruet-su         ###   ########.fr       */
+/*   Updated: 2023/08/14 13:09:13 by wruet-su         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,16 @@
 
 static void	ft_init(char **argv, t_cube *cube, t_img *img);
 static void	launch_mlx(t_cube *cube);
-static void	launch_assets(t_cube *cube);
 static void	launch_window(t_cube *cube);
 
-void	ft_cube(char **argv, int level)
+void	ft_cube(char **argv, int level, int difficulty)
 {
 	t_cube	cube;
 	t_img	img;
 
 	ft_init(argv, &cube, &img);
-	cube.lvl = level;
+	cube.level = level;
+	cube.difficulty = difficulty;
 	launch_mlx(&cube);
 	launch_assets(&cube);
 	launch_window(&cube);
@@ -64,41 +64,11 @@ static void	launch_mlx(t_cube *cube)
 		&cube->img->size_line, &cube->img->endian);
 	if (!cube->img->addr)
 		ft_error("at mlx_data_addr in launch_mlx", ": malloc", NULL, cube);
-	get_img(cube, &cube->sprites[MINNIE], "assets/minnie.xpm");
-}
-
-static void	launch_assets(t_cube *cube)
-{
-	get_img(cube, &cube->sprites[CAT1], "assets/cat/cat1.xpm");
-	get_img(cube, &cube->sprites[CAT2], "assets/cat/cat2.xpm");
-	get_img(cube, &cube->sprites[CAT3], "assets/cat/cat3.xpm");
-	get_img(cube, &cube->sprites[CAT4], "assets/cat/cat4.xpm");
-	get_img(cube, &cube->sprites[DOOR], "assets/cat/cat4.xpm");
-	get_img(cube, &cube->sprites[BRICK], "assets/cat/cat4.xpm");
-	get_img(cube, &cube->sprites[NORTH], cube->text_north);
-	get_img(cube, &cube->sprites[SOUTH], cube->text_south);
-	get_img(cube, &cube->sprites[WEST], cube->text_west);
-	get_img(cube, &cube->sprites[EAST], cube->text_east);
-	get_img(cube, &cube->sprites[CAT0], "assets/cat/cat_5.xpm");
-	get_img(cube, &cube->sprites[CAT_HURT], "assets/cat/cat_6.xpm");
-	get_img(cube, &cube->sprites[CAT_DEAD], "assets/cat/cat_7.xpm");
-	get_img(cube, &cube->sprites[SWORD], "assets/cat/sword.xpm");
-	get_img(cube, &cube->sprites[SWORD2], "assets/cat/sword2.xpm");
-	get_img(cube, &cube->sprites[GUN], "assets/cat/gun.xpm");
-	get_img(cube, &cube->sprites[GUN2], "assets/cat/gun2.xpm");
-	get_img(cube, &cube->sprites[LANDING], "assets/cat/landing.xpm");
-	get_img(cube, &cube->sprites[PAUSE_LEFT], "assets/cat/pause_left.xpm");
-	get_img(cube, &cube->sprites[PAUSE_RIGHT], "assets/cat/pause_right.xpm");
-	get_img(cube, &cube->sprites[LOST], "assets/cat/lost.xpm");
-	get_img(cube, &cube->sprites[HELP], "assets/cat/help.xpm");
-	get_img(cube, &cube->sprites[WIN], "assets/cat/victory.xpm");
-	get_img(cube, &cube->sprites[TOMB], "assets/cat/tomb.xpm");
-	get_img(cube, &cube->sprites[MINI_HURT], "assets/cat/cat_hurt.xpm");
 }
 
 static void	launch_window(t_cube *cube)
 {
-	put_my_img_to_img(0, 0, cube->sprites[LANDING], cube->img);
+	ft_landing_image(cube);
 	mlx_hook(cube->mlx_win, 2, 1L << 0, ft_key_hook, cube);
 	mlx_hook(cube->mlx_win, 17, 1L << 17, ft_close, cube);
 	ft_hooks_bonus(cube);

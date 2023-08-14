@@ -6,7 +6,7 @@
 /*   By: wruet-su <william.ruetsuquet@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 13:20:38 by wruet-su          #+#    #+#             */
-/*   Updated: 2023/08/13 20:44:41 by wruet-su         ###   ########.fr       */
+/*   Updated: 2023/08/14 14:20:52 by wruet-su         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,19 @@
 # define WIN 23
 # define TOMB 24
 # define MINI_HURT 25
-# define SPRITES_MAX_NB 30
+# define EASY 26
+# define HARD 27
+# define IMPOSSIBLE 28
+# define LEVEL_1 29
+# define LEVEL_2 30
+# define LEVEL_3 31
+# define LEVEL_4 32
+# define LEVEL_5 33
+# define LEVEL_6 34
+# define LEVEL_7 35
+# define LEVEL_8 36
+# define FINAL_WIN 37
+# define SPRITES_MAX_NB 40
 
 # define CD_COLOR 0x98FF98
 # define OP_COLOR 0xADD8E6

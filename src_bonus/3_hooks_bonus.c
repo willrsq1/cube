@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   3_hooks.c                                          :+:      :+:    :+:   */
+/*   3_hooks_bonus.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wruet-su <william.ruetsuquet@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/03 23:21:29 by wruet-su          #+#    #+#             */
-/*   Updated: 2023/08/14 07:40:02 by wruet-su         ###   ########.fr       */
+/*   Updated: 2023/08/14 14:25:16 by wruet-su         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,9 @@ int	ft_key_hook(int key, t_cube *cube)
 	cube->player.prev_x = cube->player.x;
 	cube->player.prev_y = cube->player.y;
 	ft_keys_interface(key, cube);
+	if (!cube->welcome_window || cube->escape || cube->help_menu || \
+		cube->difficulty_window || cube->game_was_won)
+		return (1);
 	ft_key_pressed(key, cube);
 	ft_key_enemy(key, cube);
 	ft_key_hook_bonus(key, cube);
@@ -27,8 +30,6 @@ int	ft_key_hook(int key, t_cube *cube)
 		cube->player.y = cube->player.prev_y;
 		return (1);
 	}
-	if (cube->win && key != SPACE_KEY)
-		ft_levels(cube);
 	return (1);
 }
 

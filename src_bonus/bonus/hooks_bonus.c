@@ -6,7 +6,7 @@
 /*   By: wruet-su <william.ruetsuquet@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 03:03:59 by wruet-su          #+#    #+#             */
-/*   Updated: 2023/08/14 07:39:22 by wruet-su         ###   ########.fr       */
+/*   Updated: 2023/08/14 13:45:07 by wruet-su         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,9 @@ int	handle_mouse_move(int x, int y, t_cube *cube)
 {
 	if (!cube->mouse_drag)
 		return (1);
+	if (!cube->welcome_window || cube->escape || cube->help_menu || \
+		cube->difficulty_window)
+		return (1);
 	cube->mouse_drag = 0;
 	if (x > cube->mouse_x && x - cube->mouse_x > 10)
 		cube->player.angle -= (cube->mouse_x - x) * 0.003;
@@ -95,8 +98,6 @@ int	handle_mouse_click(int key, int x, int y, t_cube *cube)
 		ft_levels(cube);
 	if (cube->lost)
 		ft_free_exit(cube);
-	if (cube->help_menu)
-		cube->help_menu = 0;
 	if (cube->escape && key)
 	{
 		ft_create_image(cube);

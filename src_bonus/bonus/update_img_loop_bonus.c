@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   update_img_loop.c                                  :+:      :+:    :+:   */
+/*   update_img_loop_bonus.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wruet-su <william.ruetsuquet@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 05:40:06 by wruet-su          #+#    #+#             */
-/*   Updated: 2023/08/14 07:40:11 by wruet-su         ###   ########.fr       */
+/*   Updated: 2023/08/14 13:01:47 by wruet-su         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,7 @@
 
 int	update_loop(t_cube *cube)
 {
-	if (!cube->welcome_window)
-		return (1);
-	if (!cube->mouse_drag)
+	if (!cube->welcome_window || cube->difficulty_window)
 		return (1);
 	if (!cube->escape && !cube->lost && !cube->help_menu && !cube->win)
 	{
