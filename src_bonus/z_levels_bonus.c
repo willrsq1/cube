@@ -6,7 +6,7 @@
 /*   By: wruet-su <william.ruetsuquet@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/13 09:16:05 by wruet-su          #+#    #+#             */
-/*   Updated: 2023/08/14 20:28:06 by wruet-su         ###   ########.fr       */
+/*   Updated: 2023/08/14 21:56:15 by wruet-su         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,26 +21,14 @@ void	ft_difficulty(int key, t_cube *cube)
 		cube->difficulty == IMPOSSIBLE))
 		ft_landing_image(cube);
 	else if (cube->difficulty == EASY && key == DOWN_ARROW)
-	{
 		cube->difficulty = HARD;
-		put_my_img_to_img(0, 0, cube->sprites[cube->difficulty], cube->img);
-	}
 	else if (cube->difficulty == HARD && key == DOWN_ARROW)
-	{
 		cube->difficulty = IMPOSSIBLE;
-		put_my_img_to_img(0, 0, cube->sprites[cube->difficulty], cube->img);
-	}
 	else if (cube->difficulty == HARD && key == UP_ARROW)
-	{
 		cube->difficulty = EASY;
-		put_my_img_to_img(0, 0, cube->sprites[cube->difficulty], cube->img);
-	}
 	else if (cube->difficulty == IMPOSSIBLE && key == UP_ARROW)
-	{
 		cube->difficulty = HARD;
-		put_my_img_to_img(0, 0, cube->sprites[cube->difficulty], cube->img);
-	}
-	else
+	if (key != ENTER_KEY)
 		put_my_img_to_img(0, 0, cube->sprites[cube->difficulty], cube->img);
 	ft_destroy_image(cube);
 }
@@ -68,8 +56,9 @@ void	ft_levels(t_cube *cube)
 
 	if (cube->level == LEVEL_1)
 		s[1] = "maps/level_2.cub";
-	if ((cube->difficulty == EASY && cube->level == LEVEL_2) || \
-		(cube->difficulty == HARD && cube->level == LEVEL_4))
+	if ((cube->difficulty == EASY && cube->level == LEVEL_1) || \
+		(cube->difficulty == HARD && cube->level == LEVEL_3) || \
+		(cube->difficulty == IMPOSSIBLE && cube->level == LEVEL_5))
 	{
 		cube->win = 1;
 		cube->game_was_won = 1;

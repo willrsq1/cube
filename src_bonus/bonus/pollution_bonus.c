@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pollution.c                                        :+:      :+:    :+:   */
+/*   pollution_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wruet-su <william.ruetsuquet@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 21:16:33 by wruet-su          #+#    #+#             */
-/*   Updated: 2023/08/14 00:01:52 by wruet-su         ###   ########.fr       */
+/*   Updated: 2023/08/14 21:54:22 by wruet-su         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,6 @@ static void	win_lose_screen(t_cube *cube, bool has_zeros, bool has_enemies)
 	if (!has_enemies)
 	{	
 		cube->win = 1;
-		cube->game_was_won = 1;
 		ft_create_image(cube);
 		put_my_img_to_img(0, 0, cube->sprites[WIN], cube->img);
 		ft_destroy_image(cube);

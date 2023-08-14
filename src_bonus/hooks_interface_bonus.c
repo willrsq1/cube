@@ -6,35 +6,22 @@
 /*   By: wruet-su <william.ruetsuquet@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 22:30:10 by wruet-su          #+#    #+#             */
-/*   Updated: 2023/08/14 20:26:02 by wruet-su         ###   ########.fr       */
+/*   Updated: 2023/08/14 21:56:49 by wruet-su         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes_bonus/cube_bonus.h"
 
 static void	pause_screen_image(int key, t_cube *cube);
+static void	difficulty(t_cube *cube);
 
 void	ft_keys_interface(int key, t_cube *cube)
 {
+	if (cube->game_was_won)
+		ft_free_exit(cube);
 	if (!cube->welcome_window && key == ENTER_KEY && !cube->escape \
 		&& !cube->help_menu && !cube->game_was_won)
-	{
-		if (cube->level == 0 && !cube->difficulty_window)
-		{
-			cube->difficulty = EASY;
-			cube->difficulty_window = 1;
-			cube->level = LEVEL_1;
-			ft_create_image(cube);
-			put_my_img_to_img(0, 0, cube->sprites[EASY], cube->img);
-			ft_destroy_image(cube);
-		}
-		else
-		{
-			cube->start = ft_time();
-			cube->difficulty_window = 0;
-		}
-		cube->welcome_window = 1;
-	}
+		difficulty(cube);
 	else if (cube->difficulty_window && !cube->escape && cube->welcome_window)
 		ft_difficulty(key, cube);
 	else if (cube->lost && key != SPACE_KEY)
@@ -45,8 +32,6 @@ void	ft_keys_interface(int key, t_cube *cube)
 		help_menu_function(key, cube);
 	else if (cube->win && key != SPACE_KEY)
 		ft_levels(cube);
-	else if (cube->game_was_won && key == ENTER_KEY)
-		ft_free_exit(cube);
 }
 
 void	esc_key_function(int key, t_cube *cube)
@@ -63,9 +48,7 @@ void	esc_key_function(int key, t_cube *cube)
 			if (cube->help_menu)
 				put_my_img_to_img(0, 0, cube->sprites[HELP], cube->img);
 			else if (!cube->welcome_window && cube->level == 0)
-				put_my_img_to_img(0, 0, cube->sprites[LANDING], cube->img);
-			else if (!cube->welcome_window)
-				put_my_img_to_img(0, 0, cube->sprites[cube->level], cube->img);
+				ft_landing_image(cube);
 		}
 		else if (key == LEFT_ARROW || key == RIGHT_ARROW)
 			pause_screen_image(key, cube);
@@ -119,4 +102,23 @@ void	help_menu_function(int key, t_cube *cube)
 		put_my_img_to_img(0, 0, cube->sprites[HELP], cube->img);
 	}
 	ft_destroy_image(cube);
+}
+
+static void	difficulty(t_cube *cube)
+{
+	if (cube->level == 0 && !cube->difficulty_window)
+	{
+		cube->difficulty = EASY;
+		cube->difficulty_window = 1;
+		cube->level = LEVEL_1;
+		ft_create_image(cube);
+		put_my_img_to_img(0, 0, cube->sprites[EASY], cube->img);
+		ft_destroy_image(cube);
+	}
+	else
+	{
+		cube->start = ft_time();
+		cube->difficulty_window = 0;
+	}
+	cube->welcome_window = 1;
 }
