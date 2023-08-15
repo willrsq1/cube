@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   attack_hooks.c                                     :+:      :+:    :+:   */
+/*   attack_hooks_bonus.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wruet-su <william.ruetsuquet@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 07:19:57 by wruet-su          #+#    #+#             */
-/*   Updated: 2023/08/12 22:16:51 by wruet-su         ###   ########.fr       */
+/*   Updated: 2023/08/15 11:35:38 by wruet-su         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 static void	ft_key_enemy_dead(int key, t_cube *cube, int range);
 static void	ft_key_enemy_hurt(int key, t_cube *cube, int range);
 static void	ft_key_enemy_alive(int key, t_cube *cube, int range);
+static void	ft_key_enemy_alive_2(t_cube *cube, double i);
 
 void	ft_key_enemy(int key, t_cube *cube)
 {
@@ -53,6 +54,9 @@ static void	ft_key_enemy_dead(int key, t_cube *cube, int range)
 	}
 	if (i < range && key == SPACE_KEY)
 	{
+		if (cube->map[(int)(cube->player.x + cos(cube->player.angle) \
+			* i)][(int)(cube->player.y + sin(cube->player.angle) \
+			* i)] != 1)
 		cube->map[(int)(cube->player.x + cos(cube->player.angle) \
 			* i)][(int)(cube->player.y + sin(cube->player.angle) \
 			* i)] = 0;
@@ -79,6 +83,9 @@ static void	ft_key_enemy_hurt(int key, t_cube *cube, int range)
 	}
 	if (i < range && key == SPACE_KEY)
 	{
+		if (cube->map[(int)(cube->player.x + cos(cube->player.angle) \
+			* i)][(int)(cube->player.y + sin(cube->player.angle) \
+			* i)] != 1 && ++cube->kill_count)
 		cube->map[(int)(cube->player.x + cos(cube->player.angle) \
 			* i)][(int)(cube->player.y + sin(cube->player.angle) \
 			* i)] = DEAD_ENEMY;
@@ -103,6 +110,14 @@ static void	ft_key_enemy_alive(int key, t_cube *cube, int range)
 		i += 0.01;
 	}
 	if (i < range && key == SPACE_KEY)
+		ft_key_enemy_alive_2(cube, i);
+}
+
+static void	ft_key_enemy_alive_2(t_cube *cube, double i)
+{
+	if (cube->map[(int)(cube->player.x + cos(cube->player.angle) \
+		* i)][(int)(cube->player.y + sin(cube->player.angle) \
+		* i)] != 1)
 	{
 		cube->map[(int)(cube->player.x + cos(cube->player.angle) \
 			* i)][(int)(cube->player.y + sin(cube->player.angle) \

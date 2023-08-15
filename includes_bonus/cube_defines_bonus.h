@@ -6,7 +6,7 @@
 /*   By: wruet-su <william.ruetsuquet@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 13:20:38 by wruet-su          #+#    #+#             */
-/*   Updated: 2023/08/14 14:20:52 by wruet-su         ###   ########.fr       */
+/*   Updated: 2023/08/15 08:19:27 by wruet-su         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,7 @@
 # define LEVEL_7 35
 # define LEVEL_8 36
 # define FINAL_WIN 37
+# define SUN 38
 # define SPRITES_MAX_NB 40
 
 # define CD_COLOR 0x98FF98

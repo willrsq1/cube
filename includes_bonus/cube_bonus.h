@@ -6,7 +6,7 @@
 /*   By: wruet-su <william.ruetsuquet@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/03 18:57:50 by wruet-su          #+#    #+#             */
-/*   Updated: 2023/08/14 20:22:51 by wruet-su         ###   ########.fr       */
+/*   Updated: 2023/08/15 08:57:20 by wruet-su         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,7 @@ typedef struct s_cube
 	double		angle;
 	int			level;
 	int			difficulty;
+	int			kill_count;
 }	t_cube;
 
 /*	1_cube.c			*/
@@ -238,4 +239,5 @@ void	launch_assets(t_cube *cube);
 void	ft_landing_image(t_cube *cube);
 void	ft_difficulty(int key, t_cube *cube);
 
+void	ft_kill_count(t_cube *cube);
 #endif

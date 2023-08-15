@@ -6,7 +6,7 @@
 /*   By: wruet-su <william.ruetsuquet@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/13 09:16:05 by wruet-su          #+#    #+#             */
-/*   Updated: 2023/08/14 21:56:15 by wruet-su         ###   ########.fr       */
+/*   Updated: 2023/08/15 11:37:08 by wruet-su         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,11 +54,9 @@ void	ft_levels(t_cube *cube)
 {
 	char	*s[2];
 
-	if (cube->level == LEVEL_1)
-		s[1] = "maps/level_2.cub";
-	if ((cube->difficulty == EASY && cube->level == LEVEL_1) || \
-		(cube->difficulty == HARD && cube->level == LEVEL_3) || \
-		(cube->difficulty == IMPOSSIBLE && cube->level == LEVEL_5))
+	if ((cube->difficulty == EASY && cube->level == LEVEL_2) || \
+		(cube->difficulty == HARD && cube->level == LEVEL_4) || \
+		(cube->difficulty == IMPOSSIBLE && cube->level == LEVEL_6))
 	{
 		cube->win = 1;
 		cube->game_was_won = 1;
@@ -67,14 +65,16 @@ void	ft_levels(t_cube *cube)
 		ft_destroy_image(cube);
 		return ;
 	}
+	if (cube->level == LEVEL_1)
+		s[1] = "maps/level_2.cub";
 	if (cube->level == LEVEL_2)
 		s[1] = "maps/level_3.cub";
 	if (cube->level == LEVEL_3)
 		s[1] = "maps/level_4.cub";
 	if (cube->level == LEVEL_4)
 		s[1] = "maps/level_5.cub";
-	cube->win = 0;
-	cube->level += 1;
+	if (cube->level == LEVEL_5)
+		s[1] = "maps/level_6.cub";
 	ft_free(cube);
-	ft_cube(s, cube->level, cube->difficulty);
+	ft_cube(s, cube->level + 1, cube->difficulty);
 }

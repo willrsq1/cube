@@ -6,7 +6,7 @@
 /*   By: wruet-su <william.ruetsuquet@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 05:40:06 by wruet-su          #+#    #+#             */
-/*   Updated: 2023/08/14 13:01:47 by wruet-su         ###   ########.fr       */
+/*   Updated: 2023/08/15 09:00:22 by wruet-su         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,5 +30,8 @@ void	ft_update_image(t_cube *cube)
 	ft_create_image(cube);
 	ft_raycasting(cube, &cube->player);
 	minimap_weapons_door_message(cube);
+	if (cube->level == LEVEL_2)
+		put_my_img_to_img(WIN_WIDTH * 0.4, 0, cube->sprites[SUN], cube->img);
 	ft_destroy_image(cube);
+	ft_kill_count(cube);
 }

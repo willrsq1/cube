@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   player_init.c                                      :+:      :+:    :+:   */
+/*   player_init_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wruet-su <william.ruetsuquet@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/03 20:30:09 by wruet-su          #+#    #+#             */
-/*   Updated: 2023/08/12 22:28:35 by wruet-su         ###   ########.fr       */
+/*   Updated: 2023/08/15 11:00:23 by wruet-su         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,15 +54,12 @@ void	print_map(int **map, int map_lenght, t_cube *cube)
 		y = 0;
 		while (map[i][y] != END)
 		{
-			if (map[i][y] > 31 && ++letter_number)
-				printf("%c", map[i][y]);
-			else
-				printf("%d", map[i][y]);
+			if (map[i][y] > 31)
+				++letter_number;
 			if (map[i][y] == ENEMY)
 				cube->map_has_enemies = 1;
 			y++;
 		}
-		printf("\n");
 		i++;
 	}
 	if (letter_number != 1)

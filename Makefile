@@ -63,6 +63,7 @@ SOURCES_BONUS =     0_main_bonus.c \
 					bonus/enemy_utils_bonus.c \
 					bonus/update_img_loop_bonus.c \
 					bonus/pollution_bonus.c \
+					bonus/kill_count_bonus.c \
 
 MLX = mlx_linux
 ### OBJECTS ###

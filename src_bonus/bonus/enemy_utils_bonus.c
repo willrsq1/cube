@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   enemy_utils.c                                      :+:      :+:    :+:   */
+/*   enemy_utils_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wruet-su <william.ruetsuquet@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 05:58:46 by wruet-su          #+#    #+#             */
-/*   Updated: 2023/08/13 19:00:48 by wruet-su         ###   ########.fr       */
+/*   Updated: 2023/08/15 08:29:50 by wruet-su         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,23 +55,24 @@ int	ft_cat_frame(t_cube *cube)
 	int		id;
 
 	time = (ft_time() - cube->start) % 1000;
-	if (time > 500)
-		cube->player.x_wall = 1 - cube->player.x_wall;
 	if (cube->id == HURT_ENEMY)
-		return (CAT_HURT);
-	if (cube->id == DEAD_ENEMY)
-		return (CAT_DEAD);
-	if (cube->id == ENEMY)
-		return (CAT0);
-	time = time % 500;
-	if (time > 750 / 2)
+		id = CAT_HURT;
+	else if (cube->id == DEAD_ENEMY)
+		id = CAT_DEAD;
+	else if (cube->id == ENEMY)
+		id = CAT0;
+	else if (cube->level == LEVEL_2)
 		id = CAT4;
-	if (time > 500 / 2)
+	else if (time > 750)
+		id = CAT4;
+	else if (time > 500)
 		id = CAT3;
-	if (time > 250 / 2)
+	else if (time > 250)
 		id = CAT2;
 	else
 		id = CAT1;
+	if (time > 500 && !(cube->level == LEVEL_2 && id == CAT4))
+		cube->player.x_wall = 1 - cube->player.x_wall;
 	return (id);
 }
 
@@ -82,7 +83,8 @@ int	ft_valid_pos_enemy(t_cube *cube, double x, double y)
 		y > cube->map_width || \
 		x > cube->map_lenght || \
 		cube->map[(int)x][(int)y] == END || \
-		cube->map[(int)x][(int)y] == WALL)
+		cube->map[(int)x][(int)y] == WALL || \
+		cube->map[(int)x][(int)y] == CLOSED_DOOR)
 		return (END);
 	if (cube->map[(int)x][(int)y] <= ENEMY)
 		return (cube->map[(int)x][(int)y]);

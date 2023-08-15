@@ -6,7 +6,7 @@
 /*   By: wruet-su <william.ruetsuquet@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/03 18:57:37 by wruet-su          #+#    #+#             */
-/*   Updated: 2023/08/14 20:23:59 by wruet-su         ###   ########.fr       */
+/*   Updated: 2023/08/15 11:35:52 by wruet-su         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,14 @@
 
 int	main(int argc, char **argv)
 {
-	if (argc != 2)
-		return (write(2, "Input one arg only\n", 19), 1);
-	ft_cube(argv, 0, 0);
+	char	*s[1];
+
+	if (argc > 2)
+		return (write(2, "Too many args\n", 14), 1);
+	s[1] = "maps/level_1.cub";
+	if (argc == 2)
+		ft_cube(argv, 0, 0);
+	else
+		ft_cube(s, 0, 0);
+	return (0);
 }

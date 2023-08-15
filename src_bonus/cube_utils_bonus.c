@@ -6,7 +6,7 @@
 /*   By: wruet-su <william.ruetsuquet@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/03 18:57:56 by wruet-su          #+#    #+#             */
-/*   Updated: 2023/08/14 20:29:24 by wruet-su         ###   ########.fr       */
+/*   Updated: 2023/08/15 11:37:02 by wruet-su         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,7 @@ void	ft_free(t_cube *cube)
 	int	i;
 
 	i = -1;
+	cube->win = 0;
 	if (cube->map)
 	{
 		while (++i < cube->map_lenght)
