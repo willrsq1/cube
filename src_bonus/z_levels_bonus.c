@@ -6,7 +6,7 @@
 /*   By: wruet-su <william.ruetsuquet@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/13 09:16:05 by wruet-su          #+#    #+#             */
-/*   Updated: 2023/08/15 11:37:08 by wruet-su         ###   ########.fr       */
+/*   Updated: 2023/08/16 17:17:50 by wruet-su         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,8 @@ void	ft_landing_image(t_cube *cube)
 		put_my_img_to_img(0, 0, cube->sprites[LEVEL_4], cube->img);
 	if (cube->level == LEVEL_5)
 		put_my_img_to_img(0, 0, cube->sprites[LEVEL_5], cube->img);
+	if (cube->level == LEVEL_6)
+		put_my_img_to_img(0, 0, cube->sprites[LEVEL_6], cube->img);
 }
 
 void	ft_levels(t_cube *cube)

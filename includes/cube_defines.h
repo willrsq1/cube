@@ -6,7 +6,7 @@
 /*   By: wruet-su <william.ruetsuquet@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 13:20:38 by wruet-su          #+#    #+#             */
-/*   Updated: 2023/08/12 23:38:15 by wruet-su         ###   ########.fr       */
+/*   Updated: 2023/08/17 13:10:33 by wruet-su         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,6 @@
 # define END -1
 # define FAIL -3
 # define WALL 1
-# define ENEMY -3
 
 /*	Settings		*/
 

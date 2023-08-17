@@ -6,7 +6,7 @@
 /*   By: wruet-su <william.ruetsuquet@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/04 12:12:02 by wruet-su          #+#    #+#             */
-/*   Updated: 2023/08/10 23:37:16 by wruet-su         ###   ########.fr       */
+/*   Updated: 2023/08/17 13:10:27 by wruet-su         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	ft_raycasting(t_cube *cube, t_player *player)
 
 	fix_angle(&player->direction);
 	pixel_column = 0;
-	angle = player->direction + player->fov / 2;
+	angle = player->direction + (player->fov / 2);
 	while (pixel_column <= WIN_WIDTH)
 	{
 		angle -= player->fov / WIN_WIDTH;
