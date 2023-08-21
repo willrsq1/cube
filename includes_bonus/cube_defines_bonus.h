@@ -6,7 +6,7 @@
 /*   By: wruet-su <william.ruetsuquet@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 13:20:38 by wruet-su          #+#    #+#             */
-/*   Updated: 2023/08/17 13:23:46 by wruet-su         ###   ########.fr       */
+/*   Updated: 2023/08/21 21:44:21 by wruet-su         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,13 @@
 # define LEVEL_8 36
 # define FINAL_WIN 37
 # define SUN 38
-# define SPRITES_MAX_NB 40
+# define LANDING1 39
+# define LANDING2 40
+# define LANDING3 41
+# define LANDING4 42
+# define LANDING5 43
+# define LANDING6 44
+# define SPRITES_MAX_NB 50
 
 # define CD_COLOR 0x98FF98
 # define OP_COLOR 0xADD8E6

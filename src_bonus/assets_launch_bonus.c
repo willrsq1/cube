@@ -6,13 +6,14 @@
 /*   By: wruet-su <william.ruetsuquet@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 12:37:05 by wruet-su          #+#    #+#             */
-/*   Updated: 2023/08/15 11:40:53 by wruet-su         ###   ########.fr       */
+/*   Updated: 2023/08/21 21:59:56 by wruet-su         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes_bonus/cube_bonus.h"
 
 static void	launch_assets_part2(t_cube *cube);
+static void	launch_assets_part3(t_cube *cube);
 
 void	launch_assets(t_cube *cube)
 {
@@ -62,8 +63,19 @@ static void	launch_assets_part2(t_cube *cube)
 	get_img(cube, &cube->sprites[LEVEL_4], "assets/cat/level4.xpm");
 	get_img(cube, &cube->sprites[LEVEL_5], "assets/cat/level5.xpm");
 	get_img(cube, &cube->sprites[LEVEL_6], "assets/cat/level6.xpm");
+	launch_assets_part3(cube);
+}
+
+static void	launch_assets_part3(t_cube *cube)
+{
 	get_img(cube, &cube->sprites[LEVEL_7], "assets/cat/level7.xpm");
 	get_img(cube, &cube->sprites[LEVEL_8], "assets/cat/level8.xpm");
 	get_img(cube, &cube->sprites[FINAL_WIN], "assets/cat/final_victory.xpm");
 	get_img(cube, &cube->sprites[SUN], "assets/cat/sun.xpm");
+	get_img(cube, &cube->sprites[LANDING1], "assets/cat/landing1.xpm");
+	get_img(cube, &cube->sprites[LANDING2], "assets/cat/landing2.xpm");
+	get_img(cube, &cube->sprites[LANDING3], "assets/cat/landing3.xpm");
+	get_img(cube, &cube->sprites[LANDING4], "assets/cat/landing4.xpm");
+	get_img(cube, &cube->sprites[LANDING5], "assets/cat/landing5.xpm");
+	get_img(cube, &cube->sprites[LANDING6], "assets/cat/landing6.xpm");
 }
