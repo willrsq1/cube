@@ -88,7 +88,7 @@ static void	ft_draw_square(int size, int y, int x, t_cube *cube)
 					ft_pixel(cube->img, x * size + i, y * size + j, CD_COLOR);
 				else if (cube->map[y][x] == OPENED_DOOR)
 					ft_pixel(cube->img, x * size + i, y * size + j, OP_COLOR);
-				else if ((cube->map[y][x] == WALL))
+				else if (cube->map[y][x] == WALL)
 					ft_pixel(cube->img, x * size + i, y * size + j, BLACK);
 				else
 					ft_pixel(cube->img, x * size + i, y * size + j, GRAY);

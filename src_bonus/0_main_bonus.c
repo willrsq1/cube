@@ -14,7 +14,7 @@
 
 int	main(int argc, char **argv)
 {
-	char	*s[1];
+	char	*s[2];
 
 	if (argc > 2)
 		return (write(2, "Too many args\n", 14), 1);
