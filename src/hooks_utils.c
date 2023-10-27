@@ -6,7 +6,7 @@
 /*   By: wruet-su <william.ruetsuquet@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/03 23:13:23 by wruet-su          #+#    #+#             */
-/*   Updated: 2023/08/10 22:54:58 by wruet-su         ###   ########.fr       */
+/*   Updated: 2023/10/27 18:27:48 by wruet-su         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,18 +20,18 @@ void	ft_key_pressed(int key, t_cube *cube)
 	if (key == ESC_KEY)
 		ft_free_exit(cube);
 	if (key == A_KEY)
-		cube->player.direction -= 0.07;
+		cube->player.direction -= 0.05;
 	if (key == Z_KEY)
-		cube->player.direction += 0.07;
+		cube->player.direction += 0.05;
 	if (key == UP_ARROW)
 	{
-			cube->player.x += cos(cube->player.direction) / 10;
-			cube->player.y += sin(cube->player.direction) / 10;
+			cube->player.x += cosf(cube->player.direction) / 10;
+			cube->player.y += sinf(cube->player.direction) / 10;
 	}
 	if (key == DOWN_ARROW)
 	{
-		cube->player.x -= cos(cube->player.direction) / 10;
-		cube->player.y -= sin(cube->player.direction) / 10;
+		cube->player.x -= cosf(cube->player.direction) / 10;
+		cube->player.y -= sinf(cube->player.direction) / 10;
 	}
 	if (key == RIGHT_ARROW)
 		ft_move_right(cube);
@@ -61,13 +61,13 @@ static void	ft_move_right(t_cube *cube)
 {
 	if (cube->player.direction > 0 && cube->player.direction < PI)
 	{
-		cube->player.x -= cos(cube->player.direction + PI / 2) / 10;
-		cube->player.y -= sin(cube->player.direction + PI / 2) / 10;
+		cube->player.x -= cosf(cube->player.direction + PI / 2) / 10;
+		cube->player.y -= sinf(cube->player.direction + PI / 2) / 10;
 	}
 	else
 	{
-		cube->player.x += cos(cube->player.direction - PI / 2) / 10;
-		cube->player.y += sin(cube->player.direction - PI / 2) / 10;
+		cube->player.x += cosf(cube->player.direction - PI / 2) / 10;
+		cube->player.y += sinf(cube->player.direction - PI / 2) / 10;
 	}
 }
 
@@ -75,12 +75,12 @@ static void	ft_move_left(t_cube *cube)
 {
 	if (cube->player.direction > 0 && cube->player.direction < PI)
 	{
-		cube->player.x -= cos(cube->player.direction - PI / 2) / 10;
-		cube->player.y -= sin(cube->player.direction - PI / 2) / 10;
+		cube->player.x -= cosf(cube->player.direction - PI / 2) / 10;
+		cube->player.y -= sinf(cube->player.direction - PI / 2) / 10;
 	}
 	else
 	{
-		cube->player.x += cos(cube->player.direction + PI / 2) / 10;
-		cube->player.y += sin(cube->player.direction + PI / 2) / 10;
+		cube->player.x += cosf(cube->player.direction + PI / 2) / 10;
+		cube->player.y += sinf(cube->player.direction + PI / 2) / 10;
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: wruet-su <william.ruetsuquet@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 01:59:35 by wruet-su          #+#    #+#             */
-/*   Updated: 2023/08/17 15:17:06 by wruet-su         ###   ########.fr       */
+/*   Updated: 2023/10/27 17:01:28 by wruet-su         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,12 @@ void	draw_enemy_back(t_cube *cube, t_player *player, double angle, int x)
 {
 	double	distance;
 
-	player->vector_x = cos(angle) * 0.01;
-	player->vector_y = sin(angle) * 0.01;
+	player->vector_x = cosf(angle) * 0.01;
+	player->vector_y = sinf(angle) * 0.01;
 	distance = get_dist_enemy_back(cube, player, player->x, player->y);
 	if (distance == -1)
 		return ;
-	distance *= cos(player->angle - angle) * player->fov;
+	distance *= cosf(player->angle - angle) * player->fov;
 	draw_column_enemy(distance, cube, x);
 }
 

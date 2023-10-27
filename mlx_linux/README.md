@@ -23,7 +23,7 @@ Requirements for Linux
  - Utility functions from BSD systems - development files (package libbsd-dev)
  - **e.g. _sudo apt-get install gcc make xorg libxext-dev libbsd-dev_ (Debian/Ubuntu)**
  
-Requirements for MacOS
+Requirements for Macosf
  - [Xquartz](https://www.xquartz.org/)
 
 ```bash

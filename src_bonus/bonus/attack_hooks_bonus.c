@@ -6,7 +6,7 @@
 /*   By: wruet-su <william.ruetsuquet@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 07:19:57 by wruet-su          #+#    #+#             */
-/*   Updated: 2023/08/15 11:35:38 by wruet-su         ###   ########.fr       */
+/*   Updated: 2023/10/27 17:01:28 by wruet-su         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,8 @@ static void	ft_key_enemy_dead(int key, t_cube *cube, int range)
 	while (i < range)
 	{
 		return_value = ft_valid_pos_enemy(cube, cube->player.x + \
-			cos(cube->player.angle) * i, cube->player.y + \
-			sin(cube->player.angle) * i);
+			cosf(cube->player.angle) * i, cube->player.y + \
+			sinf(cube->player.angle) * i);
 		if (return_value == DEAD_ENEMY)
 			break ;
 		if (return_value == END)
@@ -54,11 +54,11 @@ static void	ft_key_enemy_dead(int key, t_cube *cube, int range)
 	}
 	if (i < range && key == SPACE_KEY)
 	{
-		if (cube->map[(int)(cube->player.x + cos(cube->player.angle) \
-			* i)][(int)(cube->player.y + sin(cube->player.angle) \
+		if (cube->map[(int)(cube->player.x + cosf(cube->player.angle) \
+			* i)][(int)(cube->player.y + sinf(cube->player.angle) \
 			* i)] != 1)
-		cube->map[(int)(cube->player.x + cos(cube->player.angle) \
-			* i)][(int)(cube->player.y + sin(cube->player.angle) \
+		cube->map[(int)(cube->player.x + cosf(cube->player.angle) \
+			* i)][(int)(cube->player.y + sinf(cube->player.angle) \
 			* i)] = 0;
 		cube->attacking = 1;
 	}
@@ -73,8 +73,8 @@ static void	ft_key_enemy_hurt(int key, t_cube *cube, int range)
 	while (i < range)
 	{
 		return_value = ft_valid_pos_enemy(cube, cube->player.x + \
-			cos(cube->player.angle) * i, cube->player.y + \
-			sin(cube->player.angle) * i);
+			cosf(cube->player.angle) * i, cube->player.y + \
+			sinf(cube->player.angle) * i);
 		if (return_value == HURT_ENEMY)
 			break ;
 		if (return_value == END)
@@ -83,11 +83,11 @@ static void	ft_key_enemy_hurt(int key, t_cube *cube, int range)
 	}
 	if (i < range && key == SPACE_KEY)
 	{
-		if (cube->map[(int)(cube->player.x + cos(cube->player.angle) \
-			* i)][(int)(cube->player.y + sin(cube->player.angle) \
+		if (cube->map[(int)(cube->player.x + cosf(cube->player.angle) \
+			* i)][(int)(cube->player.y + sinf(cube->player.angle) \
 			* i)] != 1 && ++cube->kill_count)
-		cube->map[(int)(cube->player.x + cos(cube->player.angle) \
-			* i)][(int)(cube->player.y + sin(cube->player.angle) \
+		cube->map[(int)(cube->player.x + cosf(cube->player.angle) \
+			* i)][(int)(cube->player.y + sinf(cube->player.angle) \
 			* i)] = DEAD_ENEMY;
 		cube->attacking = 1;
 	}
@@ -103,8 +103,8 @@ static void	ft_key_enemy_alive(int key, t_cube *cube, int range)
 	while (i < range && return_value != ENEMY)
 	{
 		return_value = ft_valid_pos_enemy(cube, cube->player.x + \
-			cos(cube->player.angle) * i, cube->player.y + \
-			sin(cube->player.angle) * i);
+			cosf(cube->player.angle) * i, cube->player.y + \
+			sinf(cube->player.angle) * i);
 		if (return_value == END)
 			i = range;
 		i += 0.01;
@@ -115,16 +115,16 @@ static void	ft_key_enemy_alive(int key, t_cube *cube, int range)
 
 static void	ft_key_enemy_alive_2(t_cube *cube, double i)
 {
-	if (cube->map[(int)(cube->player.x + cos(cube->player.angle) \
-		* i)][(int)(cube->player.y + sin(cube->player.angle) \
+	if (cube->map[(int)(cube->player.x + cosf(cube->player.angle) \
+		* i)][(int)(cube->player.y + sinf(cube->player.angle) \
 		* i)] != 1)
 	{
-		cube->map[(int)(cube->player.x + cos(cube->player.angle) \
-			* i)][(int)(cube->player.y + sin(cube->player.angle) \
+		cube->map[(int)(cube->player.x + cosf(cube->player.angle) \
+			* i)][(int)(cube->player.y + sinf(cube->player.angle) \
 			* i)] = HURT_ENEMY;
 		if (cube->weapon == SWORD)
-			cube->map[(int)(cube->player.x + cos(cube->player.angle) \
-				* i)][(int)(cube->player.y + sin(cube->player.angle) \
+			cube->map[(int)(cube->player.x + cosf(cube->player.angle) \
+				* i)][(int)(cube->player.y + sinf(cube->player.angle) \
 				* i)] = DEAD_ENEMY;
 		cube->attacking = 1;
 	}

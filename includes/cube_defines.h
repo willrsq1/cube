@@ -6,7 +6,7 @@
 /*   By: wruet-su <william.ruetsuquet@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 13:20:38 by wruet-su          #+#    #+#             */
-/*   Updated: 2023/08/17 13:10:33 by wruet-su         ###   ########.fr       */
+/*   Updated: 2023/10/27 18:21:25 by wruet-su         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,9 @@
 # define PI  3.141592999999999857863031138549558818340301513671875
 # define PII 6.283184999999999575948095298372209072113037109375
 # define PI3 4.7123889923095703125
-# define FOV 1.17072000
+# define FOV 0.617072000
+// # define FOV 1
+// # define FOV 1.17072000
 # define RESOLUTION 0.0001
 # define WIN_WIDTH 1300
 # define WIN_HEIGHT 800

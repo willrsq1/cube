@@ -6,7 +6,7 @@
 /*   By: wruet-su <william.ruetsuquet@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/04 12:12:02 by wruet-su          #+#    #+#             */
-/*   Updated: 2023/08/17 13:10:27 by wruet-su         ###   ########.fr       */
+/*   Updated: 2023/10/27 18:21:16 by wruet-su         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,10 @@ void	ft_raycasting(t_cube *cube, t_player *player)
 	while (pixel_column <= WIN_WIDTH)
 	{
 		angle -= player->fov / WIN_WIDTH;
-		player->vector_x = cos(angle) * 0.01;
-		player->vector_y = sin(angle) * 0.01;
+		player->vector_x = cosf(angle) * 0.01;
+		player->vector_y = sinf(angle) * 0.01;
 		distance = get_dist(cube, player, player->x, player->y);
-		distance *= cos(player->direction - angle) * player->fov;
+		distance *= cosf(player->direction - angle);
 		draw_wall(distance, cube, pixel_column);
 		pixel_column++;
 	}
@@ -99,9 +99,10 @@ static void	draw_wall(double dist, t_cube *cube, int x)
 	int		half_of_wall_size;
 	int		y;
 
-	if (dist < 0.1)
-		dist = 0.1;
+	if (dist < 1)
+		dist = 1;
 	wall_size = WIN_HEIGHT / dist;
+	wall_size /= (float)WIN_HEIGHT / (float)WIN_WIDTH * cube->player.fov; 
 	half_of_wall_size = wall_size / 2;
 	if (half_of_wall_size > WIN_HEIGHT / 2)
 		half_of_wall_size = WIN_HEIGHT / 2;
