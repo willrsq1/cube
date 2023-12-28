@@ -104,7 +104,7 @@ static void	win_lose_screen(t_cube *cube, bool has_zeros, bool has_enemies)
 		ft_destroy_image(cube);
 	}
 	if (!has_enemies)
-	{	
+	{
 		cube->win = 1;
 		ft_create_image(cube);
 		put_my_img_to_img(0, 0, cube->sprites[WIN], cube->img);

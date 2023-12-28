@@ -19,23 +19,23 @@ void	ft_key_pressed(int key, t_cube *cube)
 {
 	if (key == ESC_KEY)
 		ft_free_exit(cube);
-	if (key == A_KEY)
+	if (key == RIGHT_ARROW)
 		cube->player.direction -= 0.05;
-	if (key == Z_KEY)
+	if (key == LEFT_ARROW)
 		cube->player.direction += 0.05;
-	if (key == UP_ARROW)
+	if (key == W_KEY)
 	{
-			cube->player.x += cosf(cube->player.direction) / 10;
-			cube->player.y += sinf(cube->player.direction) / 10;
+		cube->player.x += cosf(cube->player.direction) / 10;
+		cube->player.y += sinf(cube->player.direction) / 10;
 	}
-	if (key == DOWN_ARROW)
+	if (key == S_KEY)
 	{
 		cube->player.x -= cosf(cube->player.direction) / 10;
 		cube->player.y -= sinf(cube->player.direction) / 10;
 	}
-	if (key == RIGHT_ARROW)
+	if (key == D_KEY)
 		ft_move_right(cube);
-	if (key == LEFT_ARROW)
+	if (key == A_KEY)
 		ft_move_left(cube);
 }
 

@@ -20,7 +20,7 @@ void	ft_textures_and_colors(t_cube *cube, int fd, char *s, int count)
 	while (count != 6)
 	{
 		s = get_next_line(fd);
-		if (!s && write(2, "Incomplete .cub file: Missing an identifier.\n", 45))
+		if (!s && write(2, "Incomplete .cub file.\n", 23))
 			ft_free_exit(cube);
 		if (s[0] == 'N' && (s[1] == 'O' || s[1] == ' ') && ++count)
 			cube->text_north = ft_get_texture(cube->text_north, cube, s);

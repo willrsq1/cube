@@ -102,7 +102,7 @@ static void	draw_wall(double dist, t_cube *cube, int x)
 	if (dist < 1)
 		dist = 1;
 	wall_size = WIN_HEIGHT / dist;
-	wall_size /= (float)WIN_HEIGHT / (float)WIN_WIDTH * cube->player.fov; 
+	wall_size /= (float)WIN_HEIGHT / (float)WIN_WIDTH * cube->player.fov;
 	half_of_wall_size = wall_size / 2;
 	if (half_of_wall_size > WIN_HEIGHT / 2)
 		half_of_wall_size = WIN_HEIGHT / 2;

@@ -21,7 +21,7 @@ void	ft_cube(char **argv)
 {
 	t_cube	cube;
 	t_img	img;
-//faut mettre les key hooks demandés dans le sujet
+
 	ft_init(argv, &cube, &img);
 	launch_mlx(&cube);
 	launch_assets(&cube);

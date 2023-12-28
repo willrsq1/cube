@@ -12,20 +12,6 @@
 
 #include "../../includes_bonus/cube_bonus.h"
 
-typedef struct s_draw
-{
-	int					x0;
-	int					y0;
-	int					x1;
-	int					y1;
-	int					dx;
-	int					dy;
-	int					sx;
-	int					sy;
-	int					err;
-	int					e2;
-}			t_draw;
-
 static void	ft_do_draw_loop(t_img *img, t_draw plot, int color);
 static void	draw(t_draw plot, int color, t_img *img);
 

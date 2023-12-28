@@ -96,8 +96,11 @@
 # define DOWN_ARROW 65364
 # define RIGHT_ARROW 65363
 # define ENTER_KEY 65293
-# define ONE_KEY 38 
-# define TWO_KEY 233 
+# define ONE_KEY 49
+# define TWO_KEY 50
+# define W_KEY 119
+# define S_KEY 115
+# define D_KEY 100
 # define A_KEY 97
 # define Z_KEY 122
 # define M_KEY 109
@@ -173,4 +176,19 @@
 # define ROSEWOOD       0x65000B
 # define TOMATO_RED     0xFF6347
 # define VERMILION      0xE34234
+
+typedef struct s_draw
+{
+	int					x0;
+	int					y0;
+	int					x1;
+	int					y1;
+	int					dx;
+	int					dy;
+	int					sx;
+	int					sy;
+	int					err;
+	int					e2;
+}			t_draw;
+
 #endif

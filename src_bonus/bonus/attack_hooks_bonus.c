@@ -57,9 +57,9 @@ static void	ft_key_enemy_dead(int key, t_cube *cube, int range)
 		if (cube->map[(int)(cube->player.x + cosf(cube->player.angle) \
 			* i)][(int)(cube->player.y + sinf(cube->player.angle) \
 			* i)] != 1)
-		cube->map[(int)(cube->player.x + cosf(cube->player.angle) \
-			* i)][(int)(cube->player.y + sinf(cube->player.angle) \
-			* i)] = 0;
+			cube->map[(int)(cube->player.x + cosf(cube->player.angle) \
+				* i)][(int)(cube->player.y + sinf(cube->player.angle) \
+				* i)] = 0;
 		cube->attacking = 1;
 	}
 }
@@ -86,9 +86,9 @@ static void	ft_key_enemy_hurt(int key, t_cube *cube, int range)
 		if (cube->map[(int)(cube->player.x + cosf(cube->player.angle) \
 			* i)][(int)(cube->player.y + sinf(cube->player.angle) \
 			* i)] != 1 && ++cube->kill_count)
-		cube->map[(int)(cube->player.x + cosf(cube->player.angle) \
-			* i)][(int)(cube->player.y + sinf(cube->player.angle) \
-			* i)] = DEAD_ENEMY;
+			cube->map[(int)(cube->player.x + cosf(cube->player.angle) \
+				* i)][(int)(cube->player.y + sinf(cube->player.angle) \
+				* i)] = DEAD_ENEMY;
 		cube->attacking = 1;
 	}
 }
